@@ -12,29 +12,123 @@
 		<link href="./css/style.css" rel="stylesheet" />
 		<title>Logue's Lab</title>
 	</head>
-	<body class="metro">
+	<body class="metro bg-darker">
 		<div id="wrap" class="bg-darker">
-			<div class="tile-area tile-area-transparent">
+			<div class="tile-area tile-area-transparent bg-darker">
 
 				<h1 class="tile-area-title fg-white title-text-shadow">Logue's Lab <small>(Under construction)</small></h1>
 				
-				<a href="http://logue.be/" class="user-id fg-white bg-steel" >
+				<a href="https://github.com/logue/" class="user-id fg-white bg-steel" >
 					<div class="user-id-image">
-						<i class="icon-home fg-white"></i>
+						<i class="icon-github fg-white"></i>
 					</div>
 					<div class="user-id-name">
-						back to LogueWiki
+						Logue's Github
 					</div>
 				</a>
 
-				<div class="tile-group triple">
+				<div class="tile-group double">
 					<div class="tile-group-title">Main Project</div>
-					<a href="http://pukiwiki.logue.be/" class="tile bg-gray bg-lightBlue double" data-repo-name="pukiwiki_adv">
+					<a href="http://pukiwiki.logue.be/" class="tile bg-lightBlue double" data-repo-name="pukiwiki_adv">
 						<div class="tile-content icon">
 							<img src="https://raw.github.com/logue/pukiwiki_adv/master/webroot/image/pukiwiki_adv.logo.png" alt="PukiWiki Adv. Logo" />
 						</div>
 						<div class="brand">
 							<div class="label">PukiWiki Advance</div>
+						</div>
+					</a>
+					<a href="./JSMML/" class="tile bg-yellow" data-repo-name="JSMML">
+						<div class="tile-content icon">
+							<span class="icon-music"></span>
+						</div>
+						<div class="brand">
+							<div class="label">JSMML</div>
+						</div>
+					</a>
+					<a href="https://github.com/logue/JS-File-Class" class="tile bg-gray" data-repo-name="JS-File-Class">
+						<div class="tile-content icon">
+							<span class="icon-file"></span>
+						</div>
+						<div class="brand">
+							<div class="label">JS File Class</div>
+						</div>
+					</a>
+				</div>
+				<div class="tile-group">
+					<div class="tile-group-title">Forked Project</div>
+					<a href="./smfplayer.js/" class="tile bg-gray" data-repo-name="smfplayer.js">
+						<div class="tile-content icon">
+							<span class="icon-playlist"></span>
+						</div>
+						<div class="brand">
+							<div class="label">smfplayer.js</div>
+						</div>
+					</a>
+					<a href="https://github.com/logue/sf2synth.js" class="tile bg-gray" data-repo-name="sf2synth.js">
+						<div class="tile-content icon">
+							<span class="icon-music"></span>
+						</div>
+						<div class="brand">
+							<div class="label">sf2synth.js</div>
+						</div>
+					</a>
+					<a href="./espeak-japanese/" class="tile bg-gray" data-repo-name="espeak-japanese">
+						<div class="tile-content icon">
+							<span class="icon-comments-5"></span>
+						</div>
+						<div class="brand">
+							<div class="label">JS日本語読み上げ</div>
+						</div>
+					</a>
+				</div>
+				<div class="tile-group triple">
+					<div class="tile-group-title">Mabinogi</div>
+					<a href="http://mabiassist.logue.be/MabiCooker" class="tile bg-orange" data-repo-name="MabiCooker">
+						<div class="tile-content icon">
+							<span class="icon-tablet"></span>
+						</div>
+						<div class="brand">
+							<div class="label">MabiCooker</div>
+						</div>
+					</a>
+					<a href="https://github.com/logue/CookImplement" class="tile bg-darkTeal" data-repo-name="CookImplement">
+						<div class="tile-content icon">
+							<span class="icon-puzzle"></span>
+						</div>
+						<div class="brand">
+							<div class="label">CookImplement</div>
+						</div>
+					</a>
+					<a href="http://mabiassist.logue.be/MabiPacker" class="tile  bg-brown" data-repo-name="MabiPack">
+						<div class="tile-content icon">
+							<img src="https://github.com/logue/MabiPack/raw/master/Resources/logo.png" alt="MabiPacker Logo" />
+						</div>
+						<div class="brand">
+							<div class="label">MabiPacker</div>
+						</div>
+					</a>
+					<a href="http://logue.github.io/PSGConverter/" class="tile  bg-gray" data-repo-name="PSGConverter">
+						<div class="tile-content icon">
+							<span class="icon-file-xml"></span>
+						</div>
+						<div class="brand">
+							<div class="label">PSGConverter</div>
+						</div>
+					</a>
+					<a href="https://github.com/logue/MabinogiResource" class="tile  bg-gray" data-repo-name="MabinogiResource">
+						<div class="tile-content icon">
+							<span class="icon-puzzle"></span>
+						</div>
+						<div class="brand">
+							<div class="label">MabinogiResource</div>
+						</div>
+					</a>
+					<a href="./MabiMmlEmu/" class="tile bg-magenta double" data-repo-name="MabiMmlEmu">
+						<div class="tile-content icon">
+							<span class="icon-playlist"></span>
+						</div>
+						<div class="brand">
+							<div class="label">Mabinogi MML Emulator</div>
 						</div>
 					</a>
 				</div>
@@ -99,8 +193,9 @@ $(document).ready(function(){
 				var repo = results.data;
 				var watchers = repo.watchers;
 				var forks = repo.forks;
+				if (typeof(watchers) === 'undefined') return;
 
-				$this.children('.brand').append('<div class="badge">' + watchers + '</div>');
+				$this.children('.brand').append('<div class="badge bg-red">' + watchers + '</div>');
 			}
 		});
 	});
