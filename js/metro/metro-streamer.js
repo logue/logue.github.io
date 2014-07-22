@@ -211,10 +211,4 @@
     })
 })( jQuery );
 
-$(function () {
-    $('[data-role=streamer]').streamer();
-});
 
-function reinitStreamers(){
-    $('[data-role=streamer]').streamer();
-}

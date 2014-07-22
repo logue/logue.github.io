@@ -9,12 +9,11 @@
             format: "yyyy-mm-dd",
             multiSelect: false,
             startMode: 'day', //year, month, day
-            months : ['January',' February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-            monthsShort : ['Jan',' Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-            weekDays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-            buttonsNames: ['Today', 'Clear'],
+            weekStart: (METRO_WEEK_START != undefined ? METRO_WEEK_START : 0), // 0 - Sunday, 1 - Monday
+            otherDays: false,
             date: new Date(),
             buttons: true,
+            locale: $.Metro.currentLocale,
             getDates: function(d){},
             click: function(d, d0){},
             _storage: []
@@ -24,6 +23,7 @@
         _month: 0,
         _day: 0,
         _today: new Date(),
+        _event: '',
 
         _mode: 'day', // day, month, year
         _distance: 0,
@@ -36,9 +36,10 @@
             if (element.data('multiSelect') != undefined) this.options.multiSelect = element.data("multiSelect");
             if (element.data('format') != undefined) this.options.format = element.data("format");
             if (element.data('date') != undefined) this.options.date = new Date(element.data("date"));
-            if (element.data('months') != undefined) this.options.months = element.data('months');
-            if (element.data('weekDays') != undefined) this.options.weekDays = element.data('weekDays');
+            if (element.data('locale') != undefined) this.options.locale = element.data("locale");
             if (element.data('startMode') != undefined) this.options.startMode = element.data('startMode');
+            if (element.data('weekStart') != undefined) this.options.weekStart = element.data('weekStart');
+            if (element.data('otherDays') != undefined) this.options.otherDays = element.data('otherDays');
 
             this._year = this.options.date.getFullYear();
             this._distance = parseInt(this.options.date.getFullYear())-4;
@@ -55,6 +56,7 @@
             var year = this._year,
                 month = this._month,
                 day = this._day,
+                event = this._event,
                 feb = 28;
 
             if (month == 1) {
@@ -78,28 +80,47 @@
 
             $("<td/>").addClass("text-center").html("<a class='btn-previous-year' href='#'><i class='icon-previous'></i></a>").appendTo(tr);
             $("<td/>").addClass("text-center").html("<a class='btn-previous-month' href='#'><i class='icon-arrow-left-4'></i></a>").appendTo(tr);
-            $("<td/>").attr("colspan", 3).addClass("text-center").html("<a class='btn-select-month' href='#'>"+this.options.months[month]+' '+year+"</a>").appendTo(tr);
+
+            $("<td/>").attr("colspan", 3).addClass("text-center").html("<a class='btn-select-month' href='#'>"+ $.Metro.Locale[this.options.locale].months[month]+' '+year+"</a>").appendTo(tr);
+
             $("<td/>").addClass("text-center").html("<a class='btn-next-month' href='#'><i class='icon-arrow-right-4'></i></a>").appendTo(tr);
             $("<td/>").addClass("text-center").html("<a class='btn-next-year' href='#'><i class='icon-next'></i></a>").appendTo(tr);
 
             tr.addClass("calendar-header").appendTo(table);
 
             // Add day names
+            var j;
             tr = $("<tr/>");
             for(i = 0; i < 7; i++) {
-                td = $("<td/>").addClass("text-center day-of-week").html(this.options.weekDays[i]).appendTo(tr);
+                if (!this.options.weekStart)
+                    td = $("<td/>").addClass("text-center day-of-week").html($.Metro.Locale[this.options.locale].days[i+7]).appendTo(tr);
+                else {
+                    j = i + 1;
+                    if (j == 7) j = 0;
+                    td = $("<td/>").addClass("text-center day-of-week").html($.Metro.Locale[this.options.locale].days[j+7]).appendTo(tr);
+
+                }
             }
             tr.addClass("calendar-subheader").appendTo(table);
 
             // Add empty days for previos month
+            var prevMonth = this._month - 1; if (prevMonth < 0) prevMonth = 11; var daysInPrevMonth = totalDays[prevMonth];
+            var _first_week_day = ((this.options.weekStart) ? first_week_day + 6 : first_week_day)%7;
+            var htmlPrevDay = "";
             tr = $("<tr/>");
-            for(i = 0; i < first_week_day; i++) {
-                td = $("<td/>").addClass("empty").html("").appendTo(tr);
+            for(i = 0; i < _first_week_day; i++) {
+                if (this.options.otherDays) htmlPrevDay = daysInPrevMonth - (_first_week_day - i - 1);
+                td = $("<td/>").addClass("empty").html("<small class='other-day'>"+htmlPrevDay+"</small>").appendTo(tr);
             }
 
-            var week_day = first_week_day;
+            var week_day = ((this.options.weekStart) ? first_week_day + 6 : first_week_day)%7;
+            //console.log(week_day, week_day%7);
+
             for (i = 1; i <= daysInMonth; i++) {
+                //console.log(week_day, week_day%7);
+
                 week_day %= 7;
+
                 if (week_day == 0) {
                     tr.appendTo(table);
                     tr = $("<tr/>");
@@ -119,20 +140,26 @@
                 week_day++;
             }
 
+            // next month other days
+            var htmlOtherDays = "";
             for (i = week_day+1; i<=7; i++){
-                td = $("<td/>").addClass("empty").html("").appendTo(tr);
+                if (this.options.otherDays) htmlOtherDays = i - week_day;
+                td = $("<td/>").addClass("empty").html("<small class='other-day'>"+htmlOtherDays+"</small>").appendTo(tr);
             }
 
             tr.appendTo(table);
 
             if (this.options.buttons) {
                 tr = $("<tr/>").addClass("calendar-actions");
-                td = $("<td/>").attr('colspan', 7).addClass("text-left").html("" + "<button class='button calendar-btn-today small success'>"+this.options.buttonsNames[0]+"</button>&nbsp;<button class='button calendar-btn-clear small warning'>"+this.options.buttonsNames[1]+"</button>");
+                td = $("<td/>").attr('colspan', 7).addClass("text-left").html("" +
+                    "<button class='button calendar-btn-today small success'>"+$.Metro.Locale[this.options.locale].buttons[0]+
+                    "</button>&nbsp;<button class='button calendar-btn-clear small warning'>"+$.Metro.Locale[this.options.locale].buttons[1]+"</button>");
                 td.appendTo(tr);
                 tr.appendTo(table);
             }
 
             table.appendTo(this.element);
+
             this.options.getDates(this.element.data('_storage'));
         },
 
@@ -156,7 +183,8 @@
             j = 0;
             for (i=0;i<12;i++) {
 
-                td = $("<td/>").addClass("text-center month").html("<a href='#' data-month='"+i+"'>"+this.options.monthsShort[i]+"</a>");
+                //td = $("<td/>").addClass("text-center month").html("<a href='#' data-month='"+i+"'>"+this.options.monthsShort[i]+"</a>");
+                td = $("<td/>").addClass("text-center month").html("<a href='#' data-month='"+i+"'>"+$.Metro.Locale[this.options.locale].months[i+12]+"</a>");
 
                 if (this._month == i && (new Date()).getFullYear() == this._year) {
                     td.addClass("today");
@@ -229,6 +257,7 @@
                     that._renderCalendar();
                 });
                 table.find('.btn-previous-month').on('click', function(e){
+                    that._event = 'eventPrevious';
                     e.preventDefault();
                     e.stopPropagation();
                     that._month -= 1;
@@ -239,6 +268,7 @@
                     that._renderCalendar();
                 });
                 table.find('.btn-next-month').on('click', function(e){
+                    that._event = 'eventNext';
                     e.preventDefault();
                     e.stopPropagation();
                     that._month += 1;
@@ -249,18 +279,21 @@
                     that._renderCalendar();
                 });
                 table.find('.btn-previous-year').on('click', function(e){
+                    that._event = 'eventPrevious';
                     e.preventDefault();
                     e.stopPropagation();
                     that._year -= 1;
                     that._renderCalendar();
                 });
                 table.find('.btn-next-year').on('click', function(e){
+                    that._event = 'eventNext';
                     e.preventDefault();
                     e.stopPropagation();
                     that._year += 1;
                     that._renderCalendar();
                 });
                 table.find('.calendar-btn-today').on('click', function(e){
+                    that._event = 'eventNext';
                     e.preventDefault();
                     e.stopPropagation();
                     that.options.date = new Date();
@@ -282,7 +315,7 @@
                 table.find('.day a').on('click', function(e){
                     e.preventDefault();
                     e.stopPropagation();
-                    var d = (new Date(that._year, that._month, parseInt($(this).html()))).format(that.options.format);
+                    var d = (new Date(that._year, that._month, parseInt($(this).html()))).format(that.options.format,null);
                     var d0 = (new Date(that._year, that._month, parseInt($(this).html())));
 
                     if (that.options.multiSelect) {
@@ -304,6 +337,7 @@
                 });
             } else if (this._mode == 'month') {
                 table.find('.month a').on('click', function(e){
+                    that._event = 'eventNext';
                     e.preventDefault();
                     e.stopPropagation();
                     that._month = parseInt($(this).data('month'));
@@ -311,18 +345,21 @@
                     that._renderCalendar();
                 });
                 table.find('.btn-previous-year').on('click', function(e){
+                    that._event = 'eventPrevious';
                     e.preventDefault();
                     e.stopPropagation();
                     that._year -= 1;
                     that._renderCalendar();
                 });
                 table.find('.btn-next-year').on('click', function(e){
+                    that._event = 'eventNext';
                     e.preventDefault();
                     e.stopPropagation();
                     that._year += 1;
                     that._renderCalendar();
                 });
                 table.find('.btn-select-year').on('click', function(e){
+                    that._event = 'eventNext';
                     e.preventDefault();
                     e.stopPropagation();
                     that._mode = 'year';
@@ -330,6 +367,7 @@
                 });
             } else {
                 table.find('.year a').on('click', function(e){
+                    that._event = 'eventNext';
                     e.preventDefault();
                     e.stopPropagation();
                     that._year = parseInt($(this).data('year'));
@@ -337,12 +375,14 @@
                     that._renderCalendar();
                 });
                 table.find('.btn-previous-year').on('click', function(e){
+                    that._event = 'eventPrevious';
                     e.preventDefault();
                     e.stopPropagation();
                     that._distance -= 10;
                     that._renderCalendar();
                 });
                 table.find('.btn-next-year').on('click', function(e){
+                    that._event = 'eventNext';
                     e.preventDefault();
                     e.stopPropagation();
                     that._distance += 10;
@@ -393,10 +433,5 @@
     })
 })( jQuery );
 
-$(function(){
-    $('[data-role=calendar]').calendar();
-});
 
-function reinitCalendars(){
-    $('[data-role=calendar]').calendar();
-}
+

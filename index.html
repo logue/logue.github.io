@@ -7,8 +7,9 @@
 		<meta name="author" content="Masashi Yoshikawa" />
 		<meta name="keywords" content="" />
 
-		<link href="./css/metro-bootstrap.css" rel="stylesheet" />
-		<link href="./css/metro-bootstrap-responsive.css" rel="stylesheet" />
+		<link href="./css/metro-bootstrap.min.css" rel="stylesheet" />
+		<link href="./css/metro-bootstrap-responsive.min.css" rel="stylesheet" />
+		<link href="./css/iconFont.min.css" rel="stylesheet">
 		<link href="./css/style.css" rel="stylesheet" />
 		<title>Logue's Lab</title>
 	</head>
@@ -53,8 +54,24 @@
 							<div class="label">JS File Class</div>
 						</div>
 					</a>
+					<a href="https://github.com/logue/icecast2-bootstrap-theme" class="tile bg-gray" data-repo-name="icecast2-bootstrap-theme">
+						<div class="tile-content icon">
+							<span class="icon-file"></span>
+						</div>
+						<div class="brand">
+							<div class="label">icecast2-bootstrap-theme</div>
+						</div>
+					</a>
+					<a href="http://mjolnir.logue.be/" class="tile bg-green" data-repo-name="alehpone_jp">
+						<div class="tile-content icon">
+							<img src="./image/alephone.png" alt="AlephOne Logo" />
+						</div>
+						<div class="brand">
+							<div class="label">AlephOne日本語版</div>
+						</div>
+					</a>
 				</div>
-				<div class="tile-group">
+				<div class="tile-group double">
 					<div class="tile-group-title">Forked Project</div>
 					<a href="./smfplayer.js/" class="tile bg-gray" data-repo-name="smfplayer.js">
 						<div class="tile-content icon">
@@ -72,12 +89,28 @@
 							<div class="label">sf2synth.js</div>
 						</div>
 					</a>
+					<a href="./speak.js/" class="tile bg-gray" data-repo-name="speak.js">
+						<div class="tile-content icon">
+							<span class="icon-mic"></span>
+						</div>
+						<div class="brand">
+							<div class="label">speak.js</div>
+						</div>
+					</a>
 					<a href="./espeak-japanese/" class="tile bg-gray" data-repo-name="espeak-japanese">
 						<div class="tile-content icon">
 							<span class="icon-comments-5"></span>
 						</div>
 						<div class="brand">
-							<div class="label">JS日本語読み上げ</div>
+							<div class="label">eSpeak Japanese</div>
+						</div>
+					</a>
+					<a href="https://packagist.org/packages/logue/igo-php" class="tile bg-gray" data-repo-name="igo-php">
+						<div class="tile-content icon">
+							<span class="icon-keyboard"></span>
+						</div>
+						<div class="brand">
+							<div class="label">igo-php</div>
 						</div>
 					</a>
 				</div>
@@ -136,7 +169,7 @@
 		</div>
 		<div class="nav-bar fixed-bottom bg-dark fg-white" id="footer">
 			<div class="page-footer-content">
-				&#169; 2013 Logue
+				&#169; 2013,2014 Logue
 				 | 
 				CSS Framework: <a href="http://metroui.org.ua/" class="fg-lightBlue">Metro UI CSS</a>
 			</div>
@@ -188,6 +221,7 @@ $(document).ready(function(){
 			dataType: 'jsonp',
 
 			error: function(result){
+				console.error(result);
 			},
 			success: function(results){
 				var repo = results.data;

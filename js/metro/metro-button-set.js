@@ -28,7 +28,7 @@
                     btn.toggleClass("active");
 
                     that.options.click(btn, btn.hasClass("active"));
-                    that._trigger("click", event, {button: btn, on: (btn.hasClass("active"))});
+                    that._trigger("click", null, {button: btn, on: (btn.hasClass("active"))});
                 });
             });
         },
@@ -72,7 +72,7 @@
                     btn.addClass("active");
 
                     that.options.click(btn, btn.hasClass("active"));
-                    that._trigger("click", event, {button: btn, on: (btn.hasClass("active"))});
+                    that._trigger("click", null, {button: btn, on: (btn.hasClass("active"))});
                 });
             });
         },
@@ -85,12 +85,4 @@
     })
 })( jQuery );
 
-$(function(){
-    $('[data-role=button-set]').buttonset();
-    $('[data-role=button-group]').buttongroup();
-});
 
-function reinitButtonSets(){
-    $('[data-role=button-set]').buttonset();
-    $('[data-role=button-group]').buttongroup();
-}

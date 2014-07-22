@@ -1,5 +1,7 @@
 var plugins = [
+    'global',
     'core',
+    'locale',
     'touch-handler',
 
     'accordion',
@@ -12,7 +14,7 @@ var plugins = [
     'dropdown',
     'input-control',
     'live-tile',
-    //'drag-tile',
+
     'progressbar',
     'rating',
     'slider',
@@ -25,7 +27,16 @@ var plugins = [
     'treeview',
     'fluentmenu',
     'hint',
-    'streamer'
+    'streamer',
+    'stepper',
+    'drag-tile',
+    'scroll',
+    'pull',
+    'wizard',
+    'panel',
+    'tile-transform',
+
+    'initiator'
 
 
 ];

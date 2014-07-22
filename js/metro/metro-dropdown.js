@@ -1,10 +1,11 @@
 (function( $ ) {
     $.widget("metro.dropdown", {
 
-        version: "1.0.0",
+        version: "1.0.1",
 
         options: {
-            effect: 'slide'
+            effect: 'slide',
+			toggleElement: false
         },
 
         _create: function(){
@@ -12,7 +13,7 @@
                  menu = this.element,
                  name = this.name,
                  parent = this.element.parent(),
-                 toggle = parent.children('.dropdown-toggle');
+                 toggle = this.options.toggleElement || parent.children('.dropdown-toggle');
 
             if (menu.data('effect') != undefined) {
                 this.options.effect = menu.data('effect');
@@ -38,15 +39,6 @@
                 e.preventDefault();
             });
 
-            $('html').on('click', function(e){
-                //e.preventDefault();
-                $('.dropdown-menu').each(function(i, el){
-                    if (!$(el).hasClass('keep-open') && $(el).css('display')=='block') {
-                        that._close(el);
-                        /* Почему то срабатывает трижды */
-                    }
-                });
-            });
         },
 
         _open: function(el){
@@ -76,10 +68,45 @@
     });
 })( jQuery );
 
-$(function () {
-    $('[data-role=dropdown]').dropdown();
-});
+/*
+(function($){
+    $.fn.PullDown = function( options ){
+        var defaults = {
+        };
 
-function reinitDropdowns(){
-    $('[data-role=dropdown]').dropdown();
-}
+        var $this = $(this)
+            ;
+
+        var initSelectors = function(selectors){
+
+            addTouchEvents(selectors[0]);
+
+            selectors.on('click', function(e){
+                var $m = $this.parent().children(".element-menu");
+                console.log($m);
+                if ($m.css('display') == "block") {
+                    $m.slideUp('fast');
+                } else {
+                    $m.slideDown('fast');
+                }
+                e.preventDefault();
+                e.stopPropagation();
+            });
+        };
+
+        return this.each(function(){
+            if ( options ) {
+                $.extend(defaults, options);
+            }
+
+            initSelectors($this);
+        });
+    };
+
+    $(function () {
+        $('.pull-menu, .menu-pull').each(function () {
+            $(this).PullDown();
+        });
+    });
+})(window.jQuery);
+*/
