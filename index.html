@@ -3,171 +3,199 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 		<meta name="description" content="" />
 		<meta name="author" content="Masashi Yoshikawa" />
 		<meta name="keywords" content="" />
 		<meta name="google-site-verification" content="mmm5BoqiqFhBquLNyOzJ8Q4ZoQnaWvfzlHXf0og-aUU" />
+		<meta property="og:title" content="" />
+		<meta property="og:type" content="article" />
+		<meta property="og:description" content="LogueのWeb技術研究室" />
+		<meta property="og:url" content="https://logue.github.io/" />
+		<meta property="og:image" content="" />
+		<meta property="og:site_name" content="Logue's Lab" />
+		<meta property="og:email" content="logue@hotmail.co.jp" />
 
-		<link href="./css/metro-bootstrap.min.css" rel="stylesheet" />
-		<link href="./css/metro-bootstrap-responsive.min.css" rel="stylesheet" />
-		<link href="./css/iconFont.min.css" rel="stylesheet">
+		<link href="./css/metro.min.css" rel="stylesheet" />
+		<link href="./css/metro-icons.min.css" rel="stylesheet" />
+		<!--link href="./css/metro-responsive.min.css" rel="stylesheet" /-->
 		<link href="./css/style.css" rel="stylesheet" />
 		<title>Logue's Lab</title>
 	</head>
-	<body class="metro bg-darker">
-		<div id="wrap" class="bg-darker">
-			<div class="tile-area tile-area-transparent bg-darker">
 
-				<h1 class="tile-area-title fg-white title-text-shadow">Logue's Lab <small>(Under construction)</small></h1>
-				
-				<a href="//github.com/logue/" class="user-id fg-white bg-steel" >
-					<div class="user-id-image">
-						<i class="icon-github fg-white"></i>
-					</div>
-					<div class="user-id-name">
-						Logue's Github
-					</div>
-				</a>
+	<body>
+		<div data-role="charm" id="charmSearch">
+			<h1 class="text-light">検索</h1>
+			<hr class="thin" />
+			<br />
+			<div class="input-control text full-size">
+				<label>
+					<span class="dropdown-toggle drop-marker-light">Anywhere</span>
+					<ul class="d-menu" data-role="dropdown">
+						<li><a onclick="setSearchPlace(this)">Anywhere</a></li>
+						<li><a onclick="setSearchPlace(this)">Options</a></li>
+						<li><a onclick="setSearchPlace(this)">Files</a></li>
+						<li><a onclick="setSearchPlace(this)">Internet</a></li>
+					</ul>
+				</label>
+				<input type="text" />
+				<button class="button"><span class="mif-search"></span></button>
+			</div>
+		</div>
 
-				<div class="tile-group double">
-					<div class="tile-group-title">Main Project</div>
-					<a href="//pukiwiki.logue.be/" class="tile bg-lightBlue double" data-repo-name="pukiwiki_adv">
-						<div class="tile-content icon">
-							<img src="https://raw.github.com/logue/pukiwiki_adv/master/webroot/image/pukiwiki_adv.logo.png" alt="PukiWiki Adv. Logo" />
-						</div>
-						<div class="brand">
-							<div class="label">PukiWiki Advance</div>
+		<div data-role="charm" id="charmSettings" data-position="top">
+			<h1 class="text-light">設定</h1>
+			<hr class="thin" />
+			<br />
+			<div class="schemeButtons">
+				<div class="button square-button tile-area-scheme-dark" data-scheme="dark"></div>
+				<div class="button square-button tile-area-scheme-darkBrown" data-scheme="darkBrown"></div>
+				<div class="button square-button tile-area-scheme-darkCrimson" data-scheme="darkCrimson"></div>
+				<div class="button square-button tile-area-scheme-darkViolet" data-scheme="darkViolet"></div>
+				<div class="button square-button tile-area-scheme-darkMagenta" data-scheme="darkMagenta"></div>
+				<div class="button square-button tile-area-scheme-darkCyan" data-scheme="darkCyan"></div>
+				<div class="button square-button tile-area-scheme-darkCobalt" data-scheme="darkCobalt"></div>
+				<div class="button square-button tile-area-scheme-darkTeal" data-scheme="darkTeal"></div>
+				<div class="button square-button tile-area-scheme-darkEmerald" data-scheme="darkEmerald"></div>
+				<div class="button square-button tile-area-scheme-darkGreen" data-scheme="darkGreen"></div>
+				<div class="button square-button tile-area-scheme-darkOrange" data-scheme="darkOrange"></div>
+				<div class="button square-button tile-area-scheme-darkRed" data-scheme="darkRed"></div>
+				<div class="button square-button tile-area-scheme-darkPink" data-scheme="darkPink"></div>
+				<div class="button square-button tile-area-scheme-darkIndigo" data-scheme="darkIndigo"></div>
+				<div class="button square-button tile-area-scheme-darkBlue" data-scheme="darkBlue"></div>
+				<div class="button square-button tile-area-scheme-lightBlue" data-scheme="lightBlue"></div>
+				<div class="button square-button tile-area-scheme-lightTeal" data-scheme="lightTeal"></div>
+				<div class="button square-button tile-area-scheme-lightOlive" data-scheme="lightOlive"></div>
+				<div class="button square-button tile-area-scheme-lightOrange" data-scheme="lightOrange"></div>
+				<div class="button square-button tile-area-scheme-lightPink" data-scheme="lightPink"></div>
+				<div class="button square-button tile-area-scheme-grayed" data-scheme="grayed"></div>
+			</div>
+		</div>
+
+		<div class="tile-area tile-area-scheme-dark fg-white" style="height: 100%; max-height: 100% !important;">
+			<h1 class="tile-area-title">Logue's Lab <small>(Under construction)</small></h1>
+			<div class="tile-area-controls">
+				<a href="https://logue.be/" class="image-button icon-right bg-transparent fg-white bg-hover-dark no-border"><span class="sub-header no-margin text-light">Logue</span> <span class="icon mif-user"></span></a>
+				<button class="square-button bg-transparent fg-white bg-hover-dark no-border" onclick="showCharms('#charmSearch')"><span class="mif-search"></span></button>
+				<button class="square-button bg-transparent fg-white bg-hover-dark no-border" onclick="showCharms('#charmSettings')"><span class="mif-cog"></span></button>
+				<a href="https://github.com/logue" class="square-button bg-transparent fg-white bg-hover-dark no-border"><span class="mif-switch"></span></a>
+			</div>
+
+			<div class="tile-group double">
+				<div class="tile-group-title">Main Project</div>
+				<div class="tile-container">
+					<a href="//pukiwiki.logue.be/" class="tile tile-wide bg-lightBlue fg-white" data-role="tile" data-repo-name="pukiwiki_adv">
+						<div class="tile-content iconic">
+							<img src="./image/pukiwiki_adv.png" alt="PukiWiki Adv. Logo" class="icon"/>
+							<span class="tile-label">PukiWiki Advance</span>
 						</div>
 					</a>
-					<a href="./JSMML/" class="tile bg-yellow" data-repo-name="JSMML">
-						<div class="tile-content icon">
-							<span class="icon-music"></span>
-						</div>
-						<div class="brand">
-							<div class="label">JSMML</div>
+					<a href="./JSMML/" class="tile bg-yellow fg-white" data-role="tile" data-repo-name="JSMML">
+						<div class="tile-content iconic">
+							<span class="icon mif-music"></span>
+							<span class="tile-label">JSMML</span>
 						</div>
 					</a>
-					<a href="//github.com/logue/JS-File-Class" class="tile bg-gray" data-repo-name="JS-File-Class">
-						<div class="tile-content icon">
-							<span class="icon-file"></span>
-						</div>
-						<div class="brand">
-							<div class="label">JS File Class</div>
+					<a href="//github.com/logue/JS-File-Class" class="tile bg-gray fg-white" data-role="tile" data-repo-name="JS-File-Class">
+						<div class="tile-content iconic">
+							<span class="icon mif-files-empty"></span>
+							<span class="tile-label">JS File Class</span>
 						</div>
 					</a>
-					<a href="//github.com/logue/icecast2-bootstrap-theme" class="tile bg-gray" data-repo-name="icecast2-bootstrap-theme">
-						<div class="tile-content icon">
-							<span class="icon-file"></span>
-						</div>
-						<div class="brand">
-							<div class="label">icecast2-bootstrap-theme</div>
+					<a href="//github.com/logue/icecast2-bootstrap-theme" class="tile bg-gray fg-white" data-role="tile" data-repo-name="icecast2-bootstrap-theme">
+						<div class="tile-content iconic">
+							<span class="icon mif-file-code"></span>
+							<span class="tile-label">icecast2-bootstrap-theme</span>
 						</div>
 					</a>
-					<a href="//mjolnir.logue.be/" class="tile bg-green" data-repo-name="alehpone_jp">
-						<div class="tile-content icon">
-							<img src="./image/alephone.png" alt="AlephOne Logo" />
-						</div>
-						<div class="brand">
-							<div class="label">AlephOne日本語版</div>
+					<a href="//mjolnir.logue.be/" class="tile bg-green fg-white" data-role="tile" data-repo-name="alehpone_jp">
+						<div class="tile-content iconic">
+							<img src="./image/alephone.png" alt="AlephOne Logo" class="icon" />
+							<span class="tile-label">AlephOne日本語版</span>
 						</div>
 					</a>
 				</div>
-				<div class="tile-group double">
-					<div class="tile-group-title">Forked Project</div>
-					<a href="./smfplayer.js/" class="tile bg-gray" data-repo-name="smfplayer.js">
-						<div class="tile-content icon">
-							<span class="icon-playlist"></span>
-						</div>
-						<div class="brand">
-							<div class="label">smfplayer.js</div>
-						</div>
-					</a>
-					<a href="//github.com/logue/sf2synth.js" class="tile bg-gray" data-repo-name="sf2synth.js">
-						<div class="tile-content icon">
-							<span class="icon-music"></span>
-						</div>
-						<div class="brand">
-							<div class="label">sf2synth.js</div>
+			</div>
+
+			<div class="tile-group double">
+				<div class="tile-group-title">Forked Project</div>
+				<div class="tile-container">
+					<a href="./smfplayer.js/" class="tile bg-gray fg-white" data-role="tile" data-repo-name="smfplayer.js">
+						<div class="tile-content iconic">
+							<span class="icon mif-file-play"></span>
+							<span class="tile-label">smfplayer.js</span>
 						</div>
 					</a>
-					<a href="./speak.js/" class="tile bg-gray" data-repo-name="speak.js">
-						<div class="tile-content icon">
-							<span class="icon-mic"></span>
-						</div>
-						<div class="brand">
-							<div class="label">speak.js</div>
+					<a href="//github.com/logue/sf2synth.js" class="tile bg-gray fg-white" data-role="tile" data-repo-name="sf2synth.js">
+						<div class="tile-content iconic">
+							<span class="icon mif-music"></span>
+							<span class="tile-label">sf2synth.js</span>
 						</div>
 					</a>
-					<a href="./espeak-japanese/" class="tile bg-gray" data-repo-name="espeak-japanese">
-						<div class="tile-content icon">
-							<span class="icon-comments-5"></span>
-						</div>
-						<div class="brand">
-							<div class="label">eSpeak Japanese</div>
+					<a href="./speak.js/" class="tile bg-gray fg-white" data-role="tile" data-repo-name="speak.js">
+						<div class="tile-content iconic">
+							<span class="icon mif-mic"></span>
+							<span class="tile-label">speak.js</span>
 						</div>
 					</a>
-					<a href="//packagist.org/packages/logue/igo-php" class="tile bg-gray" data-repo-name="igo-php">
-						<div class="tile-content icon">
-							<span class="icon-keyboard"></span>
+					<a href="./espeak-japanese/" class="tile bg-gray fg-white" data-role="tile" data-repo-name="espeak-japanese">
+						<div class="tile-content iconic">
+							<span class="icon mif-mic"></span>
+							<span class="tile-label">eSpeak Japanese</span>
 						</div>
-						<div class="brand">
-							<div class="label">igo-php</div>
+					</a>
+					<a href="//packagist.org/packages/logue/igo-php" class="tile bg-gray fg-white" data-role="tile" data-repo-name="igo-php">
+						<div class="tile-content iconic">
+							<span class="icon mif-keyboard"></span>
+							<span class="tile-label">igo-php</span>
 						</div>
 					</a>
 				</div>
-				<div class="tile-group triple">
-					<div class="tile-group-title">Mabinogi</div>
-					<a href="//mabiassist.logue.be/MabiCooker" class="tile bg-orange" data-repo-name="MabiCooker">
-						<div class="tile-content icon">
-							<span class="icon-tablet"></span>
+			</div>
+
+			<div class="tile-group triple">
+				<div class="tile-group-title">Mabinogi</div>
+				<div class="tile-container">
+					<a href="//mabiassist.logue.be/MabiCooker" class="tile bg-orange fg-white" data-role="tile" data-repo-name="MabiCooker">
+						<div class="tile-content iconic">
+							<span class="icon mif-tablet"></span>
 						</div>
-						<div class="brand">
-							<div class="label">MabiCooker</div>
+						<span class="tile-label">MabiCooker</span>
+					</a>
+					<a href="//github.com/logue/CookImplement" class="tile bg-darkTeal fg-white" data-role="tile" data-repo-name="CookImplement">
+						<div class="tile-content iconic">
+							<span class="icon mif-library"></span>
+						</div>
+						<span class="tile-label">CookImplement</span>
+					</a>
+					<a href="//mabiassist.logue.be/MabiPacker" class="tile bg-brown fg-white" data-role="tile" data-repo-name="MabiPack">
+						<div class="tile-content iconic">
+							<img src="./image/mabipacker_logo.png" alt="MabiPacker Logo" class="icon" />
+						</div>
+						<span class="tile-label">MabiPacker</span>
+					</a>
+					<a href="//logue.github.io/PSGConverter/" class="tile bg-gray fg-white" data-role="tile" data-repo-name="PSGConverter">
+						<div class="tile-content iconic">
+							<span class="icon mif-file-code"></span>
+							<span class="tile-label">PSGConverter</span>
 						</div>
 					</a>
-					<a href="//github.com/logue/CookImplement" class="tile bg-darkTeal" data-repo-name="CookImplement">
-						<div class="tile-content icon">
-							<span class="icon-puzzle"></span>
-						</div>
-						<div class="brand">
-							<div class="label">CookImplement</div>
+					<a href="//github.com/logue/MabinogiResource" class="tile bg-gray fg-white" data-role="tile" data-repo-name="MabinogiResource">
+						<div class="tile-content iconic">
+							<span class="icon mif-file-binary"></span>
+							<span class="tile-label">MabinogiResource</span>
 						</div>
 					</a>
-					<a href="//mabiassist.logue.be/MabiPacker" class="tile  bg-brown" data-repo-name="MabiPack">
-						<div class="tile-content icon">
-							<img src="https://github.com/logue/MabiPack/raw/master/Resources/logo.png" alt="MabiPacker Logo" />
-						</div>
-						<div class="brand">
-							<div class="label">MabiPacker</div>
-						</div>
-					</a>
-					<a href="//logue.github.io/PSGConverter/" class="tile  bg-gray" data-repo-name="PSGConverter">
-						<div class="tile-content icon">
-							<span class="icon-file-xml"></span>
-						</div>
-						<div class="brand">
-							<div class="label">PSGConverter</div>
-						</div>
-					</a>
-					<a href="//github.com/logue/MabinogiResource" class="tile  bg-gray" data-repo-name="MabinogiResource">
-						<div class="tile-content icon">
-							<span class="icon-puzzle"></span>
-						</div>
-						<div class="brand">
-							<div class="label">MabinogiResource</div>
-						</div>
-					</a>
-					<a href="./MabiMmlEmu/" class="tile bg-magenta double" data-repo-name="MabiMmlEmu">
-						<div class="tile-content icon">
-							<span class="icon-playlist"></span>
-						</div>
-						<div class="brand">
-							<div class="label">Mabinogi MML Emulator</div>
+					<a href="./MabiMmlEmu/" class="tile bg-magenta tile-wide fg-white" data-role="tile" data-repo-name="MabiMmlEmu">
+						<div class="tile-content iconic">
+							<span class="icon mif-music"></span>
+							<span class="tile-label">Mabinogi MML Emulator</span>
 						</div>
 					</a>
 				</div>
 			</div>
 		</div>
+
 		<div class="nav-bar fixed-bottom bg-dark fg-white" id="footer">
 			<div class="page-footer-content">
 				&#169; 2013-2015 Logue
@@ -175,26 +203,28 @@
 				CSS Framework: <a href="http://metroui.org.ua/" class="fg-lightBlue">Metro UI CSS</a>
 			</div>
 		</div>
-		<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-		<script src="./js/jquery/jquery.widget.min.js"></script>
-		<script src="./js/jquery/jquery.mousewheel.min.js"></script>
-		<script src="./js/metro/metro-loader.js"></script>
-		
+		<script src="./js/jquery-2.1.4.min.js"></script>
+		<script src="./js/metro.min.js"></script>
 		<script type="text/javascript">/* <![CDATA[ */
 (function($) {
 	$.StartScreen = function(){
 		var plugin = this;
+		var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
 
 		plugin.init = function(){
 			setTilesAreaSize();
-			addMouseWheel();
+			if (width > 640) addMouseWheel();
 		};
 
 		var setTilesAreaSize = function(){
 			var groups = $(".tile-group");
-			var tileAreaWidth = 160;
+			var tileAreaWidth = 80;
 			$.each(groups, function(i, t){
-				tileAreaWidth += $(t).outerWidth()+46;
+				if (width <= 640) {
+					tileAreaWidth = width;
+				} else {
+					tileAreaWidth += $(t).outerWidth() + 80;
+				}
 			});
 			$(".tile-area").css({
 				width: tileAreaWidth
@@ -202,9 +232,10 @@
 		};
 
 		var addMouseWheel = function (){
-			$("body").mousewheel(function(event, delta){
+			$("body").mousewheel(function(event, delta, deltaX, deltaY){
+				var page = $(document);
 				var scroll_value = delta * 50;
-				$(document).scrollLeft($(document).scrollLeft() - scroll_value);
+				page.scrollLeft(page.scrollLeft() - scroll_value);
 				return false;
 			});
 		};
@@ -213,8 +244,84 @@
 	}
 })(jQuery);
 
-$(document).ready(function(){
+$(function(){
 	$.StartScreen();
+
+	var tiles = $(".tile, .tile-small, .tile-sqaure, .tile-wide, .tile-large, .tile-big, .tile-super");
+
+	$.each(tiles, function(){
+		var tile = $(this);
+		setTimeout(function(){
+			tile.css({
+				opacity: 1,
+				"-webkit-transform": "scale(1)",
+				"transform": "scale(1)",
+				"-webkit-transition": ".3s",
+				"transition": ".3s"
+			});
+		}, Math.floor(Math.random()*500));
+	});
+
+	$(".tile-group").animate({
+		left: 0
+	});
+});
+
+function showCharms(id){
+	var  charm = $(id).data("charm");
+	if (charm.element.data("opened") === true) {
+		charm.close();
+	} else {
+		charm.open();
+	}
+}
+
+function setSearchPlace(el){
+	var a = $(el);
+	var text = a.text();
+	var toggle = a.parents('label').children('.dropdown-toggle');
+
+	toggle.text(text);
+}
+
+$(function(){
+	var current_tile_area_scheme = localStorage.getItem('tile-area-scheme') || "tile-area-scheme-dark";
+	$(".tile-area").removeClass (function (index, css) {
+		return (css.match (/(^|\s)tile-area-scheme-\S+/g) || []).join(' ');
+	}).addClass(current_tile_area_scheme);
+
+	$(".schemeButtons .button").hover(
+			function(){
+				var b = $(this);
+				var scheme = "tile-area-scheme-" +  b.data('scheme');
+				$(".tile-area").removeClass (function (index, css) {
+					return (css.match (/(^|\s)tile-area-scheme-\S+/g) || []).join(' ');
+				}).addClass(scheme);
+			},
+			function(){
+				$(".tile-area").removeClass (function (index, css) {
+					return (css.match (/(^|\s)tile-area-scheme-\S+/g) || []).join(' ');
+				}).addClass(current_tile_area_scheme);
+			}
+	);
+
+	$(".schemeButtons .button").on("click", function(){
+		var b = $(this);
+		var scheme = "tile-area-scheme-" +  b.data('scheme');
+
+		$(".tile-area").removeClass (function (index, css) {
+			return (css.match (/(^|\s)tile-area-scheme-\S+/g) || []).join(' ');
+		}).addClass(scheme);
+
+		current_tile_area_scheme = scheme;
+		localStorage.setItem('tile-area-scheme', scheme);
+
+		showSettings();
+	});
+	
+});
+
+$(document).ready(function(){
 	$('.tile').each(function(){
 		var $this = $(this);
 		$.ajax({
@@ -230,7 +337,7 @@ $(document).ready(function(){
 				var forks = repo.forks;
 				if (typeof(watchers) === 'undefined') return;
 
-				$this.children('.brand').append('<div class="badge bg-red">' + watchers + '</div>');
+				$this.children('.tile-content').append('<span class="tile-badge bg-darkRed">' + watchers + '</span>');
 			}
 		});
 	});
