@@ -1,32 +1,34 @@
 body,
 html {
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
+
 }
 
 body {
-  @include body-font;
+    @include body-font;
 }
 
 // Custom Button Size
 .btn-xl {
-  padding: 1.25rem 2.5rem;
+    padding: 1.25rem 2.5rem;
 }
 
 // Content Section
 .content-section {
-  padding-top: 7.5rem;
-  padding-bottom: 7.5rem;
+    padding-top: 7.5rem;
+    padding-bottom: 7.5rem;
 }
 
 .content-section-heading {
-  h2 {
-    font-size: 3rem;
-  }
-  h3 {
-    font-size: 1rem;
-    text-transform: uppercase;
-  }
+    h2 {
+        font-size: 3rem;
+    }
+
+    h3 {
+        font-size: 1rem;
+        text-transform: uppercase;
+    }
 }
 
 // Typography
@@ -36,54 +38,67 @@ h3,
 h4,
 h5,
 h6 {
-  font-weight: 700;
+    font-family: Saira, LogoTypeGothic;
+    font-weight: 700;
 }
 
 .text-faded {
-  color: fade-out($white, 0.3);
+    color: fade-out($white, 0.3);
+}
+
+#contact {
+    padding: 2rem;
+    background: $gray-100;
+}
+
+#contact div {
+    max-width: 760px;
 }
 
 /* Map */
 
 .map {
-  height: 30rem;
+    height: 30rem;
 }
 
 @media(max-width: 992px) {
-  .map {
-    height: 75%;
-  }
+    .map {
+        height: 75%;
+    }
 }
 
 .map iframe {
-  pointer-events: none;
+    pointer-events: none;
 }
 
 // Scroll to top button
 .scroll-to-top {
-  position: fixed;
-  right: 15px;
-  bottom: 15px;
+    position: fixed;
+    right: 15px;
+    bottom: 15px;
 
-  display: none;
+    display: none;
 
-  width: 50px;
-  height: 50px;
+    width: 50px;
+    height: 50px;
 
-  text-align: center;
+    text-align: center;
 
-  color: white;
-  background: fade-out($gray-800, .5);
-
-  line-height: 45px;
-  &:focus,
-  &:hover {
     color: white;
-  }
-  &:hover {
-    background: $gray-800;
-  }
-  i {
-    font-weight: 800;
-  }
+    background: fade-out($gray-800, .5);
+
+    line-height: 45px;
+
+    &:focus,
+    &:hover {
+        color: white;
+    }
+
+    &:hover {
+        background: $gray-800;
+    }
+
+    i {
+        font-weight: 800;
+    }
 }

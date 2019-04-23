@@ -11,7 +11,8 @@ const merge = require("merge-stream");
 const plumber = require("gulp-plumber");
 const rename = require("gulp-rename");
 const sass = require("gulp-sass");
-const uglify = require("gulp-uglify");
+const uglify = require("uglify-es");
+const composer = require('gulp-uglify/composer');
 
 // Load package.json for banner
 const pkg = require('./package.json');
@@ -60,9 +61,9 @@ function modules() {
     .pipe(gulp.dest('./vendor/jquery-easing'));
   // jQuery
   var jquery = gulp.src([
-      './node_modules/jquery/dist/*',
-      '!./node_modules/jquery/dist/core.js'
-    ])
+    './node_modules/jquery/dist/*',
+    '!./node_modules/jquery/dist/core.js'
+  ])
     .pipe(gulp.dest('./vendor/jquery'));
   // Simple Line Icons
   var simpleLineIconsFonts = gulp.src('./node_modules/simple-line-icons/fonts/**')
@@ -100,12 +101,13 @@ function css() {
 
 // JS task
 function js() {
+  const minify = composer(uglify, console)
   return gulp
     .src([
       './js/*.js',
       '!./js/*.min.js'
     ])
-    .pipe(uglify())
+    .pipe(minify())
     .pipe(header(banner, {
       pkg: pkg
     }))

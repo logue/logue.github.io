@@ -1,5 +1,59 @@
 // Variables
+@font-face {
+    font-family: "LogoTypeGothic";
+    src: url('https://cdn.leafscape.be/logotype/logotype_web.woff2') format("woff2");
+}
 
+@font-face {
+    font-family: "Yu Gothic M";
+    src: local("Yu Gothic Medium");
+}
+
+// font-weight: bold の時は通常どおり Bold 書体を使わせる
+@font-face {
+    font-family: "Yu Gothic M";
+    src: local("Yu Gothic Bold");
+    font-weight: bold;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Saira:400,700');
+
+// 標準フォント
+$font-family-sans-serif: -apple-system,
+// 英文
+BlinkMacSystemFont,
+"Segoe UI",
+Roboto,
+"Helvetica Neue",
+Arial,
+"Noto Sans",
+// 和文
+"游ゴシック体",
+YuGothic,
+"Yu Gothic M",
+"游ゴシック Medium",
+"Yu Gothic Medium",
+// MacOS向け
+"ヒラギノ角ゴ ProN W3",
+"Hiragino Kaku Gothic ProN W3",
+HiraKakuProN-W3,
+"ヒラギノ角ゴ ProN",
+"Hiragino Kaku Gothic ProN",
+"ヒラギノ角ゴ Pro",
+"Hiragino Kaku Gothic Pro",
+"Noto Sans JP",
+// 旧環境向け設定
+"メイリオ",
+Meiryo,
+Osaka,
+"ＭＳ Ｐゴシック",
+"MS PGothic",
+sans-serif,
+// 絵文字
+"Apple Color Emoji",
+"Segoe UI Emoji",
+"Segoe UI Symbol",
+"Noto Color Emoji";
 // Restated Bootstrap Variables
 
 $white: #fff !default;

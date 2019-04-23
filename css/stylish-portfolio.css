@@ -4,6 +4,24 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-stylish-portfolio/blob/master/LICENSE)
  */
 
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css?family=Saira:400,700");
+@font-face {
+  font-family: "LogoTypeGothic";
+  src: url("https://cdn.leafscape.be/logotype/logotype_web.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Yu Gothic M";
+  src: local("Yu Gothic Medium");
+}
+
+@font-face {
+  font-family: "Yu Gothic M";
+  src: local("Yu Gothic Bold");
+  font-weight: bold;
+}
+
 body,
 html {
   width: 100%;
@@ -11,7 +29,7 @@ html {
 }
 
 body {
-  font-family: 'Source Sans Pro';
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "游ゴシック体", YuGothic, "Yu Gothic M", "游ゴシック Medium", "Yu Gothic Medium", "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN W3", HiraKakuProN-W3, "ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ Pro", "Hiragino Kaku Gothic Pro", "Noto Sans JP", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 .btn-xl {
@@ -38,11 +56,21 @@ h3,
 h4,
 h5,
 h6 {
+  font-family: Saira, LogoTypeGothic;
   font-weight: 700;
 }
 
 .text-faded {
   color: rgba(255, 255, 255, 0.7);
+}
+
+#contact {
+  padding: 2rem;
+  background: #f8f9fa;
+}
+
+#contact div {
+  max-width: 760px;
 }
 
 /* Map */
@@ -88,22 +116,55 @@ h6 {
 .masthead {
   min-height: 30rem;
   position: relative;
-  display: table;
   width: 100%;
   height: auto;
-  padding-top: 8rem;
-  padding-bottom: 8rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   background: -webkit-gradient(linear, left top, right top, from(rgba(255, 255, 255, 0.1)), to(rgba(255, 255, 255, 0.1))), url("../img/bg-masthead.jpg");
   background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%), url("../img/bg-masthead.jpg");
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+
+.masthead h1,
+.masthead h3 {
+  margin: auto;
+  text-shadow: 0 0 1rem white;
 }
 
 .masthead h1 {
   font-size: 4rem;
-  margin: 0;
-  padding: 0;
+  font-weight: 700;
+  -webkit-animation: masthead-anime 2s linear forwards;
+  animation: masthead-anime 2s linear forwards;
+}
+
+.masthead h3 em {
+  position: relative;
+  animation-delay: -2s;
+  -webkit-animation-delay: 2s;
+  -webkit-animation: masthead-subtext 2s ease-in forwards;
+  animation: masthead-subtext 2s ease-in forwards;
+}
+
+.masthead img {
+  height: 128px;
+  -webkit-animation: zoom 2s forwards;
+  animation: zoom 2s forwards;
 }
 
 @media (min-width: 992px) {
@@ -112,6 +173,54 @@ h6 {
   }
   .masthead h1 {
     font-size: 5.5rem;
+  }
+}
+
+@-webkit-keyframes masthead-anime {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale(4, 1);
+    transform: scale(4, 1);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: scale(1, 1);
+    transform: scale(1, 1);
+  }
+}
+
+@keyframes masthead-anime {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale(4, 1);
+    transform: scale(4, 1);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: scale(1, 1);
+    transform: scale(1, 1);
+  }
+}
+
+@-webkit-keyframes masthead-subtext {
+  0% {
+    opacity: 0;
+    top: -2rem;
+  }
+  100% {
+    opacity: 1;
+    top: 0;
+  }
+}
+
+@keyframes masthead-subtext {
+  0% {
+    opacity: 0;
+    top: -2rem;
+  }
+  100% {
+    opacity: 1;
+    top: 0;
   }
 }
 
@@ -322,6 +431,10 @@ footer.footer .social-link {
 footer.footer .social-link:hover {
   background-color: #155d74;
   text-decoration: none;
+}
+
+footer.footer .container {
+  max-width: 670px;
 }
 
 a {

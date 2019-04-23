@@ -1,8 +1,8 @@
-(function($) {
+(function ($) {
   "use strict"; // Start of use strict
 
   // Closes the sidebar menu
-  $(".menu-toggle").click(function(e) {
+  $(".menu-toggle").click(function (e) {
     e.preventDefault();
     $("#sidebar-wrapper").toggleClass("active");
     $(".menu-toggle > .fa-bars, .menu-toggle > .fa-times").toggleClass("fa-bars fa-times");
@@ -10,7 +10,7 @@
   });
 
   // Smooth scrolling using jQuery easing
-  $('a.js-scroll-trigger[href*="#"]:not([href="#"])').click(function() {
+  $('a.js-scroll-trigger[href*="#"]:not([href="#"])').click(function () {
     if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
       var target = $(this.hash);
       target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
@@ -24,14 +24,14 @@
   });
 
   // Closes responsive menu when a scroll trigger link is clicked
-  $('#sidebar-wrapper .js-scroll-trigger').click(function() {
+  $('#sidebar-wrapper .js-scroll-trigger').click(function () {
     $("#sidebar-wrapper").removeClass("active");
     $(".menu-toggle").removeClass("active");
     $(".menu-toggle > .fa-bars, .menu-toggle > .fa-times").toggleClass("fa-bars fa-times");
   });
 
   // Scroll to top button appear
-  $(document).scroll(function() {
+  $(document).scroll(function () {
     var scrollDistance = $(this).scrollTop();
     if (scrollDistance > 100) {
       $('.scroll-to-top').fadeIn();
@@ -42,6 +42,7 @@
 
 })(jQuery); // End of use strict
 
+/*
 // Disable Google Maps scrolling
 // See http://stackoverflow.com/a/25904582/1607849
 // Disable scroll zooming and bind back the click event
@@ -62,3 +63,12 @@ var onMapClickHandler = function(event) {
 }
 // Enable map zooming with mouse scroll when the user clicks the map
 $('.map').on('click', onMapClickHandler);
+*/
+
+const observer = new IntersectionObserver((entries) => {
+  for (const e of entries) {
+    console.log(e);
+  }
+});
+
+observer.observe(document.querySelector('section'));

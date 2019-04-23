@@ -17,12 +17,13 @@
     "fetchSpec": "5.8.1"
   },
   "_requiredBy": [
+    "#USER",
     "/"
   ],
   "_resolved": "https://registry.npmjs.org/@fortawesome/fontawesome-free/-/fontawesome-free-5.8.1.tgz",
   "_shasum": "cbafbfe8894c4e3e3c3a9da6774e249ac1f2da8b",
   "_spec": "@fortawesome/fontawesome-free@5.8.1",
-  "_where": "/Users/DANGER_DAVID/Sites/startbootstrap-themes/startbootstrap-stylish-portfolio",
+  "_where": "D:\\Documents\\web\\startbootstrap-stylish-portfolio",
   "author": {
     "name": "Dave Gandy",
     "email": "dave@fontawesome.com",

@@ -1,21 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 
-<head>
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
-  <meta name="author" content="">
+  <meta name="author" content="Masashi Yoshikawa" />
 
-  <title>Stylish Portfolio - Start Bootstrap Template</title>
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://logue.dev/" />
+  <meta property="og:title" content="Logue's Lab" />
+  <meta property="og:image" content="https://logue.dev/img/logo.svg" />
+  <meta property="og:description" content="このサイトでは、私の作った制作物を紹介しています。" />
+  <meta property="og:site_name" content="Logue's Lab" />
+  <meta property="article:publisher" content="https://www.facebook.com/logue256" />
+  <meta name="twitter:site" content="logue256" />
+  <title>Logue's Lab</title>
+
+  <link rel="icon" sizes="192x192" href="img/android-desktop.png" />
+  <link rel="apple-touch-icon-precomposed" href="img/ios-desktop.png" />
 
   <!-- Bootstrap Core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom Fonts -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Saira:300,900,300" rel="stylesheet">
   <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
 
   <!-- Custom CSS -->
@@ -32,7 +43,7 @@
   <nav id="sidebar-wrapper">
     <ul class="sidebar-nav">
       <li class="sidebar-brand">
-        <a class="js-scroll-trigger" href="#page-top">Start Bootstrap</a>
+        <a class="js-scroll-trigger" href="#page-top">Logue's Lab</a>
       </li>
       <li class="sidebar-nav-item">
         <a class="js-scroll-trigger" href="#page-top">Home</a>
@@ -40,9 +51,9 @@
       <li class="sidebar-nav-item">
         <a class="js-scroll-trigger" href="#about">About</a>
       </li>
-      <li class="sidebar-nav-item">
+      <!--li class="sidebar-nav-item">
         <a class="js-scroll-trigger" href="#services">Services</a>
-      </li>
+      </li-->
       <li class="sidebar-nav-item">
         <a class="js-scroll-trigger" href="#portfolio">Portfolio</a>
       </li>
@@ -55,9 +66,10 @@
   <!-- Header -->
   <header class="masthead d-flex">
     <div class="container text-center my-auto">
-      <h1 class="mb-1">Stylish Portfolio</h1>
+      <img src="img/logo.svg" />
+      <h1 class="mb-1">Logue's Lab</h1>
       <h3 class="mb-5">
-        <em>A Free Bootstrap Theme by Start Bootstrap</em>
+        <em>Creation is to embody a lusion.</em>
       </h3>
       <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Find Out More</a>
     </div>
@@ -69,17 +81,16 @@
     <div class="container text-center">
       <div class="row">
         <div class="col-lg-10 mx-auto">
-          <h2>Stylish Portfolio is the perfect theme for your next project!</h2>
-          <p class="lead mb-5">This theme features a flexible, UX friendly sidebar menu and stock photos from our friends at
-            <a href="https://unsplash.com/">Unsplash</a>!</p>
-          <a class="btn btn-dark btn-xl js-scroll-trigger" href="#services">What We Offer</a>
+          <h2>Logue.devへようこそ。</h2>
+          <p class="lead mb-5">このサイトでは、私の作った制作物を紹介しています。</p>
+          <a class="btn btn-dark btn-xl js-scroll-trigger" href="#portfolio">View Portfolio</a>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Services -->
-  <section class="content-section bg-primary text-white text-center" id="services">
+  <!--section class="content-section bg-primary text-white text-center" id="services">
     <div class="container">
       <div class="content-section-heading">
         <h3 class="text-secondary mb-0">Services</h3>
@@ -126,68 +137,98 @@
         </div>
       </div>
     </div>
-  </section>
+  </section-->
 
   <!-- Callout -->
-  <section class="callout">
+  <!--section class="callout">
     <div class="container text-center">
-      <h2 class="mx-auto mb-5">Welcome to
-        <em>your</em>
-        next website!</h2>
-      <a class="btn btn-primary btn-xl" href="https://startbootstrap.com/template-overviews/stylish-portfolio/">Download Now!</a>
+      <h2 class="mx-auto mb-5">Creation is to embody a lusion.</h2>
     </div>
-  </section>
+  </section-->
 
   <!-- Portfolio -->
   <section class="content-section" id="portfolio">
     <div class="container">
       <div class="content-section-heading text-center">
         <h3 class="text-secondary mb-0">Portfolio</h3>
-        <h2 class="mb-5">Recent Projects</h2>
+        <h2 class="mb-5">主なプロジェクト</h2>
       </div>
       <div class="row no-gutters">
-        <div class="col-lg-6">
-          <a class="portfolio-item" href="#">
+        <div class="col-xl-4 col-md-6">
+          <a class="portfolio-item" href="https://lukiwiki.logue.be/">
             <span class="caption">
               <span class="caption-content">
-                <h2>Stationary</h2>
-                <p class="mb-0">A yellow pencil with envelopes on a clean, blue backdrop!</p>
+                <h2>LukiWiki</h2>
+                <p class="mb-0">Laravelを用いたWikiエンジン。（開発中）</p>
               </span>
             </span>
             <img class="img-fluid" src="img/portfolio-1.jpg" alt="">
           </a>
         </div>
-        <div class="col-lg-6">
-          <a class="portfolio-item" href="#">
+        <div class="col-xl-4 col-md-6">
+          <a class="portfolio-item" href="https://pukiwiki.logue.be/">
             <span class="caption">
               <span class="caption-content">
-                <h2>Ice Cream</h2>
-                <p class="mb-0">A dark blue background with a colored pencil, a clip, and a tiny ice cream cone!</p>
+                <h2>PukiWiki Advance</h2>
+                <p class="mb-0">PukiWiki Plus!のフォーク。スマフォ対応などRIA化を行った。（開発終了）</p>
               </span>
             </span>
             <img class="img-fluid" src="img/portfolio-2.jpg" alt="">
           </a>
         </div>
-        <div class="col-lg-6">
-          <a class="portfolio-item" href="#">
+        <div class="col-xl-4 col-md-6">
+          <a class="portfolio-item" href="https://mjolnir.logue.be/">
             <span class="caption">
               <span class="caption-content">
-                <h2>Strawberries</h2>
-                <p class="mb-0">Strawberries are such a tasty snack, especially with a little sugar on top!</p>
+                <h2>Marathon日本語版(AlephOne-JP)</h2>
+                <p class="mb-0">往年のFPS「Marathon」シリーズとサードパーティー製シナリオの日本語化</p>
               </span>
             </span>
-            <img class="img-fluid" src="img/portfolio-3.jpg" alt="">
+            <img class="img-fluid" src="img/marathon.jpg" alt="">
           </a>
         </div>
-        <div class="col-lg-6">
-          <a class="portfolio-item" href="#">
+        <div class="col-xl-4 col-md-6">
+          <a class="portfolio-item" href="https://logue.github.io/smfplayer.js">
             <span class="caption">
               <span class="caption-content">
-                <h2>Workspace</h2>
-                <p class="mb-0">A yellow workspace with some scissors, pencils, and other objects.</p>
+                <h2>smfplayer.js / sf2synth.js</h2>
+                <p class="mb-0">ブラウザでMIDIファイルを再生。XG音源に対応したフォーク版</p>
               </span>
             </span>
-            <img class="img-fluid" src="img/portfolio-4.jpg" alt="">
+            <img class="img-fluid" src="img/smfplayer.jpg" alt="">
+          </a>
+        </div>
+        <div class="col-xl-4 col-md-6">
+          <a class="portfolio-item" href="https://logue.github.io/espeak-japanese/">
+            <span class="caption">
+              <span class="caption-content">
+                <h2>speek.js Japanese</h2>
+                <p class="mb-0">JavaScriptだけで完結する日本語読み上げ人工音声。</p>
+              </span>
+            </span>
+            <img class="img-fluid" src="img/espeakjp.jpg" alt="">
+          </a>
+        </div>
+        <div class="col-xl-4 col-md-6">
+          <a class="portfolio-item" href="https://mabiassist.logue.be/MabiPacker/ja">
+            <span class="caption">
+              <span class="caption-content">
+                <h2>MabiPacker</h2>
+                <p class="mb-0">オンラインゲーム「Mabinogi」向けModパッケージ作成ツール</p>
+              </span>
+            </span>
+            <img class="img-fluid" src="img/mabipacker.jpg" alt="">
+          </a>
+        </div>
+        <div class="col-xl-4 col-md-6">
+          <a class="portfolio-item" href="https://logue.github.io/MabiMmlEmu">
+            <span class="caption">
+              <span class="caption-content">
+                <h2>MabiMMLEmu</h2>
+                <p class="mb-0">ブラウザで走るオンラインゲーム「Mabinogi」のMMLプレイヤー</p>
+              </span>
+            </span>
+            <img class="img-fluid" src="img/mabimmlemu.jpg" alt="">
           </a>
         </div>
       </div>
@@ -195,44 +236,158 @@
   </section>
 
   <!-- Call to Action -->
-  <section class="content-section bg-primary text-white">
+  <!--section class="content-section bg-primary text-white">
     <div class="container text-center">
       <h2 class="mb-4">The buttons below are impossible to resist...</h2>
       <a href="#" class="btn btn-xl btn-light mr-4">Click Me!</a>
       <a href="#" class="btn btn-xl btn-dark">Look at Me!</a>
     </div>
-  </section>
+  </section-->
 
   <!-- Map -->
-  <section id="contact" class="map">
-    <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;aq=0&amp;oq=twitter&amp;sll=28.659344,-81.187888&amp;sspn=0.128789,0.264187&amp;ie=UTF8&amp;hq=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;t=m&amp;z=15&amp;iwloc=A&amp;output=embed"></iframe>
-    <br />
-    <small>
-      <a href="https://maps.google.com/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;aq=0&amp;oq=twitter&amp;sll=28.659344,-81.187888&amp;sspn=0.128789,0.264187&amp;ie=UTF8&amp;hq=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;t=m&amp;z=15&amp;iwloc=A"></a>
-    </small>
+  <section id="contact" class="mx-auto">
+    <div class="container">
+      <h2 class="mb-4 text-center">お問い合わせ</h2>
+      <!-- class, action, methodを変更しないでください -->
+      <form class="formrun" action="https://form.run/api/v1/r/bbjs9j2ji5g1nk38pdqzaxba" method="post"
+        data-formrun-confirm="true">
+        <!-- ↓自由に要素を追加・編集することができます -->
+        <div class="form-group row" data-formrun-class-if-success="has-success" data-formrun-class-if-error="has-danger"
+          data-formrun-target="お名前">
+          <label class="col-sm-3 col-form-label" for="name">お名前</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" id="name" name="お名前"
+              data-formrun-class-if-success="form-control-success" data-formrun-class-if-error="form-control-danger">
+          </div>
+        </div>
+
+        <div class="form-group row" data-formrun-class-if-success="has-success" data-formrun-class-if-error="has-danger"
+          data-formrun-target="メールアドレス">
+          <label class="col-sm-3 col-form-label" for="mail">メールアドレス <span class="badge badge-danger">必須</span></label>
+          <div class="col-sm-9">
+            <input name="メールアドレス" type="email" id="mail" data-formrun-type="email" data-formrun-required
+              class="form-control" placeholder="user@domain.tld">
+            <div class="invalid-feedback" data-formrun-show-if-error="メールアドレス">メールアドレスを正しく入力してください</div>
+          </div>
+        </div>
+
+        <div class="form-group row" data-formrun-class-if-success="has-success" data-formrun-class-if-error="has-danger"
+          data-formrun-target="お問い合わせ">
+          <label class="col-sm-3 col-form-label" for="body">お問い合わせ<span class="badge badge-danger">必須</span></label>
+          <div class="col-sm-9">
+            <textarea name="お問い合わせ" id="body" class="form-control" placeholder="お問い合わせ内容はここに入力してください。"
+              data-formrun-required data-formrun-class-if-success="form-control-success"
+              data-formrun-class-if-error="form-control-danger"></textarea>
+            <div class="invalid-feedback" data-formrun-show-if-error="お問い合わせ">お問い合わせ入力してください</div>
+          </div>
+        </div>
+
+        <!-- ボット投稿をブロックするためのタグ -->
+        <div class="form-group row _formrun_gotcha">
+          <style media="screen">
+            ._formrun_gotcha {
+              position: absolute !important;
+              height: 1px;
+              width: 1px;
+              overflow: hidden;
+            }
+          </style>
+          <label class="col-sm-3 col-form-label" for="_formrun_gotcha">CAPTCHA</label>
+          <div class="col-sm-9">
+            <div class="g-recaptcha" data-sitekey="6LdQnp8UAAAAALapJJEdyn4IprMsNZZh2WeUaNIy"></div>
+            <input type="text" name="_formrun_gotcha" id="_formrun_gotcha" tabindex="-1">
+          </div>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary" data-formrun-error-text="未入力の項目があります"
+            data-formrun-submitting-text="送信中..."><i class="far fa-paper-plane"></i> 送信</button>
+        </div>
+      </form>
+    </div>
   </section>
 
   <!-- Footer -->
   <footer class="footer text-center">
     <div class="container">
-      <ul class="list-inline mb-5">
+      <ul class="list-inline mb-5 mx-5">
         <li class="list-inline-item">
-          <a class="social-link rounded-circle text-white mr-3" href="#">
+          <a class="social-link rounded-circle text-white m-1" href="https://facebook.com/logue256">
             <i class="icon-social-facebook"></i>
           </a>
         </li>
         <li class="list-inline-item">
-          <a class="social-link rounded-circle text-white mr-3" href="#">
+          <a class="social-link rounded-circle text-white m-1" href="https://www.instagram.com/logue256">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a class="social-link rounded-circle text-white m-1" href="https://twitter.com/logue256">
             <i class="icon-social-twitter"></i>
           </a>
         </li>
         <li class="list-inline-item">
-          <a class="social-link rounded-circle text-white" href="#">
-            <i class="icon-social-github"></i>
+          <a class="social-link rounded-circle text-white m-1" href="https://github.com/logue">
+            <i class="fab fa-github"></i>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a class="social-link rounded-circle text-white m-1" href="https://gitlab.com/logue">
+            <i class="fab fa-gitlab"></i>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a class="social-link rounded-circle text-white m-1" href="https://hub.docker.com/u/logue/">
+            <i class="fab fa-docker"></i>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a class="social-link rounded-circle text-white m-1" href="http://line.me/ti/p/Hd8erPz_55">
+            <i class="fab fa-line"></i>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a class="social-link rounded-circle text-white m-1" href="https://www.reddit.com/user/logue256/">
+            <i class="icon-social-reddit"></i>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a class="social-link rounded-circle text-white m-1" href="https://ja.stackoverflow.com/users/5461/logue">
+            <i class="fab fa-stack-overflow"></i>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a class="social-link rounded-circle text-white m-1" href="https://soundcloud.com/logue256">
+            <i class="fab fa-soundcloud"></i>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a class="social-link rounded-circle text-white m-1" href="https://youtube.com/logue256">
+            <i class="icon-social-youtube"></i>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a class="social-link rounded-circle text-white m-1" href="https://blog.logue.be/">
+            <i class="icon-social-tumblr"></i>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a class="social-link rounded-circle text-white m-1" href="http://steamcommunity.com/id/logue256/">
+            <i class="fab fa-steam"></i>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a class="social-link rounded-circle text-white m-1"
+            href="https://account.xbox.com/ja-jp/Profile?Gamertag=Logue256">
+            <i class="fab fa-xbox"></i>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a class="social-link rounded-circle text-white m-1" href="https://twitch.tv/logue256">
+            <i class="fab fa-twitch"></i>
           </a>
         </li>
       </ul>
-      <p class="text-muted small mb-0">Copyright &copy; Your Website 2019</p>
+      <p class="text-muted small mb-0">Copyright &copy; <a href="https://logue.be/">Logue</a> 2019</p>
     </div>
   </footer>
 
@@ -251,6 +406,27 @@
   <!-- Custom scripts for this template -->
   <script src="js/stylish-portfolio.min.js"></script>
 
+  <script src="https://sdk.form.run/js/v2/formrun.js"></script>
+  <script src="https://www.google.com/recaptcha/api.js"></script>
+
+  <script>
+    /*<![CDATA[*/
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-33600926-1', 'auto');
+    ga('send', 'pageview');
+/* ]]> */
+  </script>
 </body>
 
 </html>
