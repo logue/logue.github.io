@@ -5,8 +5,8 @@
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="Masashi Yoshikawa" />
+  <meta name="description" content="このサイトでは、私の作った制作物を紹介しています。">
+  <meta name="author" content="Logue" />
 
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://logue.dev/" />
@@ -25,13 +25,25 @@
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom Fonts -->
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Saira:300,900,300" rel="stylesheet">
   <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
 
   <!-- Custom CSS -->
   <link href="css/stylish-portfolio.min.css" rel="stylesheet">
+  
+  <!-- form run -->
+  <script src="https://sdk.form.run/js/v2/formrun.js"></script>
+  <script src="https://www.google.com/recaptcha/api.js"></script>
 
+  <!-- Global Site Tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-33600926-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-33600926-1');
+  </script>
 </head>
 
 <body id="page-top">
@@ -250,34 +262,34 @@
       <h2 class="mb-4 text-center">お問い合わせ</h2>
       <!-- class, action, methodを変更しないでください -->
       <form class="formrun" action="https://form.run/api/v1/r/bbjs9j2ji5g1nk38pdqzaxba" method="post"
-        data-formrun-confirm="true">
+         data-formrun-alert-dialog>
         <!-- ↓自由に要素を追加・編集することができます -->
-        <div class="form-group row" data-formrun-class-if-success="has-success" data-formrun-class-if-error="has-danger"
+        <div class="form-group row" data-formrun-class-if-success="is-valid" data-formrun-class-if-error="is-invalid"
           data-formrun-target="お名前">
           <label class="col-sm-3 col-form-label" for="name">お名前</label>
           <div class="col-sm-9">
-            <input type="text" class="form-control" id="name" name="お名前"
-              data-formrun-class-if-success="form-control-success" data-formrun-class-if-error="form-control-danger">
+            <input type="text" class="form-control" id="name" name="お名前" placeholder="お名前"
+              data-formrun-class-if-success="is-valid" data-formrun-class-if-error="is-invalid">
           </div>
         </div>
 
-        <div class="form-group row" data-formrun-class-if-success="has-success" data-formrun-class-if-error="has-danger"
+        <div class="form-group row" data-formrun-class-if-success="is-valid" data-formrun-class-if-error="is-invalid"
           data-formrun-target="メールアドレス">
           <label class="col-sm-3 col-form-label" for="mail">メールアドレス <span class="badge badge-danger">必須</span></label>
           <div class="col-sm-9">
-            <input name="メールアドレス" type="email" id="mail" data-formrun-type="email" data-formrun-required
-              class="form-control" placeholder="user@domain.tld">
+            <input type="email" name="メールアドレス" id="mail" class="form-control" placeholder="user@domain.tld" 
+             data-formrun-type="email" data-formrun-class-if-success="is-valid" data-formrun-class-if-error="is-invalid" data-formrun-required>
             <div class="invalid-feedback" data-formrun-show-if-error="メールアドレス">メールアドレスを正しく入力してください</div>
           </div>
         </div>
 
-        <div class="form-group row" data-formrun-class-if-success="has-success" data-formrun-class-if-error="has-danger"
+        <div class="form-group row" data-formrun-class-if-success="is-valid" data-formrun-class-if-error="is-invalid"
           data-formrun-target="お問い合わせ">
           <label class="col-sm-3 col-form-label" for="body">お問い合わせ<span class="badge badge-danger">必須</span></label>
           <div class="col-sm-9">
             <textarea name="お問い合わせ" id="body" class="form-control" placeholder="お問い合わせ内容はここに入力してください。"
-              data-formrun-required data-formrun-class-if-success="form-control-success"
-              data-formrun-class-if-error="form-control-danger"></textarea>
+              data-formrun-required data-formrun-class-if-success="is-valid"
+              data-formrun-class-if-error="is-invalid"></textarea>
             <div class="invalid-feedback" data-formrun-show-if-error="お問い合わせ">お問い合わせ入力してください</div>
           </div>
         </div>
@@ -294,11 +306,12 @@
           </style>
           <label class="col-sm-3 col-form-label" for="_formrun_gotcha">CAPTCHA</label>
           <div class="col-sm-9">
-            <div class="g-recaptcha" data-sitekey="6LdQnp8UAAAAALapJJEdyn4IprMsNZZh2WeUaNIy"></div>
-            <input type="text" name="_formrun_gotcha" id="_formrun_gotcha" tabindex="-1">
+            <div class="g-recaptcha" data-sitekey="6LdQnp8UAAAAAB7xAJC5wl7RK9SSHQgjSDYIHSG6"></div>
+            <input type="text" name="_formrun_gotcha" id="_formrun_gotcha"  class="form-control" tabindex="-1">
           </div>
         </div>
         <div class="text-center">
+          <a href="javascript:void(0)" class="btn btn-secondary" data-formrun-back-button>戻る</a>
           <button type="submit" class="btn btn-primary" data-formrun-error-text="未入力の項目があります"
             data-formrun-submitting-text="送信中..."><i class="far fa-paper-plane"></i> 送信</button>
         </div>
@@ -311,78 +324,86 @@
     <div class="container">
       <ul class="list-inline mb-5 mx-5">
         <li class="list-inline-item">
-          <a class="social-link rounded-circle text-white m-1" href="https://facebook.com/logue256">
+          <a class="social-link rounded-circle text-white m-1" href="https://facebook.com/logue256" target="_blank">
             <i class="icon-social-facebook"></i>
           </a>
         </li>
         <li class="list-inline-item">
-          <a class="social-link rounded-circle text-white m-1" href="https://www.instagram.com/logue256">
+          <a class="social-link rounded-circle text-white m-1" href="https://www.instagram.com/logue256" target="_blank">
             <i class="fab fa-instagram"></i>
           </a>
         </li>
         <li class="list-inline-item">
-          <a class="social-link rounded-circle text-white m-1" href="https://twitter.com/logue256">
+          <a class="social-link rounded-circle text-white m-1" href="https://twitter.com/logue256" target="_blank">
             <i class="icon-social-twitter"></i>
           </a>
         </li>
         <li class="list-inline-item">
-          <a class="social-link rounded-circle text-white m-1" href="https://github.com/logue">
+          <a class="social-link rounded-circle text-white m-1" href="https://github.com/logue" target="_blank">
             <i class="fab fa-github"></i>
           </a>
         </li>
         <li class="list-inline-item">
-          <a class="social-link rounded-circle text-white m-1" href="https://gitlab.com/logue">
+          <a class="social-link rounded-circle text-white m-1" href="https://gitlab.com/logue" target="_blank">
             <i class="fab fa-gitlab"></i>
           </a>
         </li>
         <li class="list-inline-item">
-          <a class="social-link rounded-circle text-white m-1" href="https://hub.docker.com/u/logue/">
+          <a class="social-link rounded-circle text-white m-1" href="https://hub.docker.com/u/logue/" target="_blank">
             <i class="fab fa-docker"></i>
           </a>
         </li>
         <li class="list-inline-item">
-          <a class="social-link rounded-circle text-white m-1" href="http://line.me/ti/p/Hd8erPz_55">
+          <a class="social-link rounded-circle text-white m-1" href="http://line.me/ti/p/Hd8erPz_55" target="_blank">
             <i class="fab fa-line"></i>
           </a>
         </li>
         <li class="list-inline-item">
-          <a class="social-link rounded-circle text-white m-1" href="https://www.reddit.com/user/logue256/">
+          <a class="social-link rounded-circle text-white m-1" href="https://www.reddit.com/user/logue256/" target="_blank">
             <i class="icon-social-reddit"></i>
           </a>
         </li>
         <li class="list-inline-item">
-          <a class="social-link rounded-circle text-white m-1" href="https://ja.stackoverflow.com/users/5461/logue">
+          <a class="social-link rounded-circle text-white m-1" href="https://ja.stackoverflow.com/users/5461/logue" target="_blank">
             <i class="fab fa-stack-overflow"></i>
           </a>
         </li>
         <li class="list-inline-item">
-          <a class="social-link rounded-circle text-white m-1" href="https://soundcloud.com/logue256">
+          <a class="social-link rounded-circle text-white m-1" href="https://qiita.com/logue" target="_blank">
+            <span class="fa-stack" style="font-size: 0.5em;">
+              <i class="far fa-square fa-stack-2x fa-inverse"></i>
+              <i class="fa fa-search fa-stack-1x"></i>
+            </span>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a class="social-link rounded-circle text-white m-1" href="https://soundcloud.com/logue256" target="_blank">
             <i class="fab fa-soundcloud"></i>
           </a>
         </li>
         <li class="list-inline-item">
-          <a class="social-link rounded-circle text-white m-1" href="https://youtube.com/logue256">
+          <a class="social-link rounded-circle text-white m-1" href="https://youtube.com/logue256" target="_blank">
             <i class="icon-social-youtube"></i>
           </a>
         </li>
         <li class="list-inline-item">
-          <a class="social-link rounded-circle text-white m-1" href="https://blog.logue.be/">
+          <a class="social-link rounded-circle text-white m-1" href="https://blog.logue.be/" target="_blank">
             <i class="icon-social-tumblr"></i>
           </a>
         </li>
         <li class="list-inline-item">
-          <a class="social-link rounded-circle text-white m-1" href="http://steamcommunity.com/id/logue256/">
+          <a class="social-link rounded-circle text-white m-1" href="http://steamcommunity.com/id/logue256/" target="_blank">
             <i class="fab fa-steam"></i>
           </a>
         </li>
         <li class="list-inline-item">
           <a class="social-link rounded-circle text-white m-1"
-            href="https://account.xbox.com/ja-jp/Profile?Gamertag=Logue256">
+            href="https://account.xbox.com/ja-jp/Profile?Gamertag=Logue256" target="_blank">
             <i class="fab fa-xbox"></i>
           </a>
         </li>
         <li class="list-inline-item">
-          <a class="social-link rounded-circle text-white m-1" href="https://twitch.tv/logue256">
+          <a class="social-link rounded-circle text-white m-1" href="https://twitch.tv/logue256" target="_blank">
             <i class="fab fa-twitch"></i>
           </a>
         </li>
@@ -399,34 +420,13 @@
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="vendor/fontawesome-free/js/all.min.js"></script>
 
   <!-- Plugin JavaScript -->
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
   <!-- Custom scripts for this template -->
   <script src="js/stylish-portfolio.min.js"></script>
-
-  <script src="https://sdk.form.run/js/v2/formrun.js"></script>
-  <script src="https://www.google.com/recaptcha/api.js"></script>
-
-  <script>
-    /*<![CDATA[*/
-    (function (i, s, o, g, r, a, m) {
-      i['GoogleAnalyticsObject'] = r;
-      i[r] = i[r] || function () {
-        (i[r].q = i[r].q || []).push(arguments)
-      }, i[r].l = 1 * new Date();
-      a = s.createElement(o),
-        m = s.getElementsByTagName(o)[0];
-      a.async = 1;
-      a.src = g;
-      m.parentNode.insertBefore(a, m)
-    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-
-    ga('create', 'UA-33600926-1', 'auto');
-    ga('send', 'pageview');
-/* ]]> */
-  </script>
 </body>
 
 </html>

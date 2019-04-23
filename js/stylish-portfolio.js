@@ -64,7 +64,7 @@ var onMapClickHandler = function(event) {
 // Enable map zooming with mouse scroll when the user clicks the map
 $('.map').on('click', onMapClickHandler);
 */
-
+/*
 const observer = new IntersectionObserver((entries) => {
   for (const e of entries) {
     console.log(e);
@@ -72,3 +72,4 @@ const observer = new IntersectionObserver((entries) => {
 });
 
 observer.observe(document.querySelector('section'));
+*/
