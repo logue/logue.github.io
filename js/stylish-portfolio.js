@@ -40,6 +40,7 @@
     }
   });
 
+  $('[title]').tooltip();
 })(jQuery); // End of use strict
 
 /*
