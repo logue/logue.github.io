@@ -4,7 +4,8 @@ import bgsrc from "../assets/bg.png?url";
 
 <div
   class="glitch h-100 top-0 left-0"
-  style={`background-image: url(${bgsrc});`}
+  style={`background-image:
+      linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${bgsrc});`}
 >
   <div class="channel r"></div>
   <div class="channel g"></div>
@@ -76,10 +77,14 @@ import bgsrc from "../assets/bg.png?url";
   }
 
   .glitch {
-    background: #000 no-repeat center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background-position: center;
     background-size: cover;
-    background-size: 0;
+    z-index: -2;
     height: 100vh;
     position: relative;
     overflow: hidden;
