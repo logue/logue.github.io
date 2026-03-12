@@ -1,0 +1,97 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const accomplishments = [
+  { id: "OSS", label: "VUE-CODEMIRROR6", detail: "1.8M+ DL/YR" },
+  { id: "L10N", label: "FIRESTORM_OFFICIAL", detail: "JP_STAFF" },
+  { id: "ARCH", label: "OUTCOME_DRIVEN", detail: "TOP_DOWN" },
+];
+---
+
+<Layout title="logue.dev // PRINCIPAL_UX_ARCHITECT">
+  <div class="d-flex w-100 h-100 p-3 mx-auto flex-column cover-container">
+    <header class="mb-auto">
+      <div class="container">
+        <h3 class="float-md-start mb-0 font-lubri">.ELF_LOADED</h3>
+        <nav class="nav nav-masthead justify-content-center float-md-end">
+          <a class="nav-link py-1 px-0 active" aria-current="page" href="#"
+            >HOME</a
+          >
+          <a class="nav-link py-1 px-0 ms-3" href="https://github.com/logue"
+            >GITHUB</a
+          >
+          <a class="nav-link py-1 px-0 ms-3" href="https://x.com/logue256"
+            >X_LOG</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <main class="px-3 text-center">
+      <h1 class="font-lubri display-1 mb-4 glitch-text">LOGUE.DEV</h1>
+      <p class="lead mb-5 opacity-75 tracking-tighter">
+        EXPERIENCE-DRIVEN INVERSION:<br />
+        REVERSE-ENGINEERING THE STACK TO MANIFEST THE IDEAL UX.
+      </p>
+
+      <div
+        class="row g-4 text-start mt-5 border-top border-bottom border-secondary py-4"
+      >
+        {
+          accomplishments.map((item) => (
+            <div class="col-md-4">
+              <div class="p-2 border-start border-info border-2">
+                <small class="d-block opacity-50 font-lubri">[{item.id}]</small>
+                <div class="fw-bold">{item.label}</div>
+                <div class="small opacity-75">{item.detail}</div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </main>
+
+    <footer class="mt-auto text-center opacity-50">
+      <p class="small">
+        ACCESS_GRANTED // <span class="text-danger">SYSTEM_STABLE</span>
+      </p>
+    </footer>
+  </div>
+</Layout>
+
+<style>
+  .cover-container {
+    max-width: 54rem;
+    font-family: var(--font-ocra), monospace;
+    color: var(--hud-cyan);
+  }
+
+  .glitch-text:hover {
+    animation: glitch-anim 0.3s infinite;
+    color: var(--arasaka-red);
+    text-shadow:
+      2px 0 var(--hud-cyan),
+      -2px 0 var(--arasaka-red);
+  }
+
+  @keyframes glitch-anim {
+    0% {
+      transform: translate(0);
+    }
+    20% {
+      transform: translate(-2px, 2px);
+    }
+    40% {
+      transform: translate(-2px, -2px);
+    }
+    60% {
+      transform: translate(2px, 2px);
+    }
+    80% {
+      transform: translate(2px, -2px);
+    }
+    100% {
+      transform: translate(0);
+    }
+  }
+</style>

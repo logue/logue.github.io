@@ -1,0 +1,69 @@
+---
+// Avatar.astro - Client-side 3D Entity
+---
+
+<div id="avatar-container" class="w-100 h-100"></div>
+
+<script>
+  import * as THREE from "three";
+  import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+
+  // クライアントサイドでのみ実行
+  const container = document.getElementById("avatar-container");
+  if (container) {
+    const width = container.clientWidth;
+    const height = container.clientHeight;
+
+    // 1. Scene & Camera
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+    camera.position.z = 2; // アバターの前にカメラを置く
+
+    // 2. Renderer (透明背景にして、自作画像の背景を活かす)
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setSize(width, height);
+    renderer.setClearColor(0x000000, 0); // 背景を透明に
+    container.appendChild(renderer.domElement);
+
+    // 3. Lighting (紺碧プラザの「青」と、ロボコップの「スチール」を強調)
+    const ambientLight = new THREE.AmbientLight(0x00f3ff, 0.5); // 青い環境光
+    scene.add(ambientLight);
+
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1); // 白いスポットライト
+    directionalLight.position.set(1, 1, 1);
+    scene.add(directionalLight);
+
+    // 4. Load Avatar (logueさんのGLTF/GLBモデル)
+    const loader = new GLTFLoader();
+    // モデルファイルを /public/avatar.glb に置く想定
+    loader.load("/avatar.glb", (gltf) => {
+      const model = gltf.scene;
+      model.scale.set(1.5, 1.5, 1.5); // サイズ調整
+      scene.add(model);
+
+      // 5. Animation (低速回転 = スキャン)
+      const animate = () => {
+        requestAnimationFrame(animate);
+        model.rotation.y += 0.005; // Y軸（縦軸）を中心に回転
+        renderer.render(scene, camera);
+      };
+      animate();
+    });
+
+    // 6. Resize Handling
+    window.addEventListener("resize", () => {
+      const newWidth = container.clientWidth;
+      const newHeight = container.clientHeight;
+      renderer.setSize(newWidth, newHeight);
+      camera.aspect = newWidth / newHeight;
+      camera.updateProjectionMatrix();
+    });
+  }
+</script>
+
+<style>
+  #avatar-container {
+    /* 必要に応じて、ホログラム的なエフェクトをCSSで被せる */
+    filter: drop-shadow(0 0 10px rgba(0, 243, 255, 0.5));
+  }
+</style>

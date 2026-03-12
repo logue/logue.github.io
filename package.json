@@ -1,56 +1,29 @@
 {
-  "title": "Stylish Portfolio",
-  "name": "startbootstrap-stylish-portfolio",
-  "version": "5.0.6",
+  "name": "site",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "scripts": {
-    "start": "node_modules/.bin/gulp watch",
-    "prod": "gulp --production"
-  },
-  "description": "A stylish portfolio HTML template built with Bootstrap",
-  "keywords": [
-    "css",
-    "sass",
-    "html",
-    "responsive",
-    "theme",
-    "template"
-  ],
-  "homepage": "https://startbootstrap.com/template-overviews/stylish-portfolio",
-  "bugs": {
-    "url": "https://github.com/BlackrockDigital/startbootstrap-stylish-portfolio/issues",
-    "email": "feedback@startbootstrap.com"
-  },
-  "license": "MIT",
-  "author": "Start Bootstrap",
-  "contributors": [
-    "David Miller (http://davidmiller.io/)"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/BlackrockDigital/startbootstrap-stylish-portfolio.git"
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "5.13.0",
-    "bootstrap": "4.5.0",
-    "jquery": "3.5.1",
-    "jquery.easing": "^1.4.1",
-    "simple-line-icons": "^2.4.1"
+    "@popperjs/core": "^2.11.8",
+    "@types/bootstrap": "^5.2.10",
+    "astro": "^6.0.3",
+    "astro-bootstrap": "^0.7.2",
+    "bootstrap": "^5.3.8",
+    "three": "^0.183.2",
+    "three-js": "^79.0.0"
   },
   "devDependencies": {
-    "browser-sync": "2.26.7",
-    "del": "4.1.1",
-    "gulp": "4.0.2",
-    "gulp-autoprefixer": "6.1.0",
-    "gulp-clean-css": "4.2.0",
-    "gulp-header": "2.0.7",
-    "gulp-plumber": "^1.2.1",
-    "gulp-rename": "1.4.0",
-    "gulp-sass": "4.0.2",
-    "gulp-uglify": "3.0.2",
-    "merge-stream": "2.0.0",
-    "uglify-es": "^3.3.9"
-  },
-  "browserslist": [
-    "last 2 versions"
-  ]
+    "@types/three": "^0.183.1",
+    "prettier": "3.8.1",
+    "prettier-plugin-astro": "0.14.1",
+    "sass-embedded": "^1.98.0"
+  }
 }
