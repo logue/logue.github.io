@@ -8,13 +8,13 @@ $color-green: #ccff90;
 $color-red: #ff8a80;
 
 :root {
-  --konpeki-deep: $konpeki-deep;
-  --hud-cyan: $hud-cyan;
-  --arasaka-red: $arasaka-red;
-  --logue-steel: $logue-steel;
-  --color-blue: $color-blue;
-  --color-green: $color-green;
-  --color-red: $color-red;
+  --konpeki-deep: #{$konpeki-deep};
+  --hud-cyan: #{$hud-cyan};
+  --arasaka-red: #{$arasaka-red};
+  --logue-steel: #{$logue-steel};
+  --color-blue: #{$color-blue};
+  --color-green: #{$color-green};
+  --color-red: #{$color-red};
 }
 
 // 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
