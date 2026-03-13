@@ -3,9 +3,15 @@ import {
   fontProviders,
   passthroughImageService,
 } from "astro/config";
+// @ts-ignore
+import icon from "astro-icon";
 
 // https://astro.build/config
 export default defineConfig({
+  integrations: [
+    icon(),
+    // other integrations...
+  ],
   fonts: [
     {
       provider: fontProviders.local(),

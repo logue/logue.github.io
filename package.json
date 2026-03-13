@@ -14,14 +14,15 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
-    "@types/bootstrap": "^5.2.10",
-    "astro": "^6.0.3",
+    "astro": "^6.0.4",
     "astro-bootstrap": "^0.7.2",
+    "astro-icon": "^1.1.5",
     "bootstrap": "^5.3.8",
-    "three": "^0.183.2",
-    "three-js": "^79.0.0"
+    "three": "^0.183.2"
   },
   "devDependencies": {
+    "@iconify-json/fa6-brands": "^1.2.6",
+    "@iconify-json/fa": "^1.2.2",
     "@types/three": "^0.183.1",
     "prettier": "3.8.1",
     "prettier-plugin-astro": "0.14.1",

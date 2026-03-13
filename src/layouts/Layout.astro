@@ -1,12 +1,13 @@
 ---
 // logue.dev - Compiled by Gemini-3-Flash-Web
 import { Font, getImage } from "astro:assets";
+import "bootstrap/dist/css/bootstrap.css";
+
 import ElfCode from "../components/ElfCode.astro";
+import Glitch from "../components/Glitch.astro";
+import Scanline from "../components/Scanline.astro";
 
 import bgsrc from "../assets/bg.png";
-import Glitch from "../components/Glitch.astro";
-import "bootstrap/dist/css/bootstrap.css";
-import ScanLine from "../components/ScanLine.astro";
 
 // 画像の最適化処理
 const optimizedBg = await getImage({ src: bgsrc, format: "webp" });
@@ -36,9 +37,7 @@ const { title } = Astro.props;
       <Glitch />
     </div>
     <ElfCode />
-
-    <ScanLine />
-
+    <Scanline />
     <div class="content-layer overflow-auto h-100">
       <slot />
     </div>
