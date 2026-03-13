@@ -1,17 +1,13 @@
 ---
 // logue.dev - Compiled by Gemini-3-Flash-Web
-import { Font, getImage } from "astro:assets";
-import "bootstrap/dist/css/bootstrap.css";
+import { Font } from "astro:assets";
+import GoogleAnalytics from "@astro-kits/google-analytics";
 
 import ElfCode from "../components/ElfCode.astro";
 import Glitch from "../components/Glitch.astro";
 import Scanline from "../components/Scanline.astro";
-
-import bgsrc from "../assets/bg.png";
-
-// 画像の最適化処理
-const optimizedBg = await getImage({ src: bgsrc, format: "webp" });
-const bgUrl = `url(${optimizedBg.src})`;
+import AreaHeader from "../components/AreaHeader.astro";
+import AreaFooter from "../components/AreaFooter.astro";
 
 interface Props {
   title: string;
@@ -21,76 +17,54 @@ const { title } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="h-100">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="description" content="logue.dev" />
+    <meta name="author" content="Logue" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://logue.dev/" />
+    <meta property="og:title" content="Logue's Lab" />
+    <meta property="og:image" content="https://logue.dev/favicon.svg" />
+    <meta
+      property="og:description"
+      content="このサイトでは、私の作った制作物を紹介しています。"
+    />
+    <meta property="og:site_name" content="Logue's Lab" />
+    <meta
+      property="article:publisher"
+      content="https://www.facebook.com/logue256"
+    />
+    <meta name="twitter:site" content="logue256" />
     <title>{title}</title>
     <Font cssVariable="--font-ocra" preload />
     <Font cssVariable="--font-lubri" preload />
+    <GoogleAnalytics id="UA-33600926-1" />
   </head>
-  <body class="h-100 bg-cyber">
-    <div class="bg-layer">
-      <Glitch />
-    </div>
+  <body class="h-100 z-n2">
+    <Glitch />
     <ElfCode />
     <Scanline />
-    <div class="content-layer overflow-auto h-100">
-      <slot />
+
+    <div class="d-flex w-100 h-100 p-3 mx-auto flex-column">
+      <AreaHeader />
+      <main class="px-3 text-center">
+        <slot />
+      </main>
+      <AreaFooter />
     </div>
   </body>
 </html>
 
-<style is:global define:vars={{ bgUrl }}>
-  :root {
-    --konpeki-deep: #001524;
-    --hud-cyan: #18ffff;
-    --arasaka-red: #ff003c;
-    --logue-steel: #2c3e50;
-  }
+<style is:global lang="scss">
+  @import "../styles/bootstrap.scss";
 
-  body {
-    background-color: var(--konpeki-deep);
-  }
-
-  /* 背景レイヤー: 00005958_72A */
-  .bg-cyber {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-  }
-
-  /* 背景グリッチ */
-  .bg-layer {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image:
-      linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), var(--bgUrl);
-    background-position: center;
-    background-size: cover;
-    z-index: -2;
-  }
-
-  /* Bootstrap Cover Customization */
-  .nav-link {
-    color: var(--hud-cyan);
-    opacity: 0.5;
-    transition: all 0.2s ease;
-  }
-
-  .nav-link:hover,
-  .nav-link.active {
-    opacity: 1;
-    color: var(--arasaka-red);
-    text-shadow: 0 0 8px var(--arasaka-red);
+  .font-lubri {
+    font-family: var(--font-lubri), sans-serif;
   }
 </style>

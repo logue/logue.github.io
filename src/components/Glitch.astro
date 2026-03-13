@@ -2,14 +2,16 @@
 import bgsrc from "../assets/bg.png?url";
 ---
 
-<div
-  class="glitch h-100 top-0 left-0"
-  style={`background-image:
-      linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${bgsrc});`}
->
-  <div class="channel r"></div>
-  <div class="channel g"></div>
-  <div class="channel b"></div>
+<div class="position-fixed top-0 left-0 w-100 h-100 bg-layer">
+  <div
+    class="glitch w-100 h-100"
+    style={`background-image:
+      linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url(${bgsrc});`}
+  >
+    <div class="channel r"></div>
+    <div class="channel g"></div>
+    <div class="channel b"></div>
+  </div>
 </div>
 
 <style lang="scss">
@@ -72,20 +74,14 @@ import bgsrc from "../assets/bg.png?url";
       both;
   }
 
-  body {
-    margin: 0;
+  /* 背景グリッチ */
+  .bg-layer {
+    z-index: -2;
   }
 
   .glitch {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
     background-position: center;
     background-size: cover;
-    z-index: -2;
-    height: 100vh;
     position: relative;
     overflow: hidden;
 

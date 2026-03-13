@@ -13,6 +13,8 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astro-kits/google-analytics": "^0.1.0",
+    "@astrojs/partytown": "^2.1.5",
     "@popperjs/core": "^2.11.8",
     "astro": "^6.0.4",
     "astro-bootstrap": "^0.7.2",
@@ -21,8 +23,9 @@
     "three": "^0.183.2"
   },
   "devDependencies": {
-    "@iconify-json/fa6-brands": "^1.2.6",
     "@iconify-json/fa": "^1.2.2",
+    "@iconify-json/fa6-brands": "^1.2.6",
+    "@types/bootstrap": "^5.2.10",
     "@types/three": "^0.183.1",
     "prettier": "3.8.1",
     "prettier-plugin-astro": "0.14.1",

@@ -5,12 +5,17 @@ import {
 } from "astro/config";
 // @ts-ignore
 import icon from "astro-icon";
+import partytown from "@astrojs/partytown";
 
 // https://astro.build/config
 export default defineConfig({
   integrations: [
     icon(),
-    // other integrations...
+    partytown({
+      config: {
+        forward: ["dataLayer.push", "gtag"],
+      },
+    }),
   ],
   fonts: [
     {

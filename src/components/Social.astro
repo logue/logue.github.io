@@ -105,7 +105,14 @@ const links = [
     {
       links.map((link) => (
         <li class="list-inline-item mx-2">
-          <a href={link.url} class="cyber-icon-link" title={link.name}>
+          <a
+            href={link.url}
+            class="cyber-icon-link"
+            title={link.name}
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-title={link.name}
+          >
             <Icon name={`${link.icon}`} />
           </a>
         </li>
@@ -113,6 +120,18 @@ const links = [
     }
   </ul>
 </nav>
+
+<script>
+  // @ts-ignore
+  import { Tooltip } from "bootstrap";
+  const tooltipTriggerList = document.querySelectorAll(
+    '[data-bs-toggle="tooltip"]',
+  );
+  /* eslint-disable-next-line  no-unused-vars*/ // only required if using es-lint
+  const tooltipList = [...tooltipTriggerList].map(
+    (tooltipTriggerEl) => new Tooltip(tooltipTriggerEl),
+  );
+</script>
 
 <style>
   .cyber-icon-link {
