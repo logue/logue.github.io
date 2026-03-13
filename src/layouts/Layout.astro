@@ -1,0 +1,70 @@
+---
+// logue.dev - Compiled by Gemini-3-Flash-Web
+import { Font } from "astro:assets";
+import GoogleAnalytics from "@astro-kits/google-analytics";
+
+import ElfCode from "../components/ElfCode.astro";
+import Glitch from "../components/Glitch.astro";
+import Scanline from "../components/Scanline.astro";
+import AreaHeader from "../components/AreaHeader.astro";
+import AreaFooter from "../components/AreaFooter.astro";
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="h-100">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content="logue.dev" />
+    <meta name="author" content="Logue" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://logue.dev/" />
+    <meta property="og:title" content="Logue's Lab" />
+    <meta property="og:image" content="https://logue.dev/favicon.svg" />
+    <meta
+      property="og:description"
+      content="このサイトでは、私の作った制作物を紹介しています。"
+    />
+    <meta property="og:site_name" content="Logue's Lab" />
+    <meta
+      property="article:publisher"
+      content="https://www.facebook.com/logue256"
+    />
+    <meta name="twitter:site" content="logue256" />
+    <title>{title}</title>
+    <Font cssVariable="--font-ocra" preload />
+    <Font cssVariable="--font-lubri" preload />
+    <GoogleAnalytics id="UA-33600926-1" />
+  </head>
+  <body class="h-100 z-n2">
+    <Glitch />
+    <ElfCode />
+    <Scanline />
+
+    <div class="d-flex w-100 h-100 p-3 mx-auto flex-column">
+      <AreaHeader />
+      <main class="px-3 text-center">
+        <slot />
+      </main>
+      <AreaFooter />
+    </div>
+  </body>
+</html>
+
+<style is:global lang="scss">
+  @import "../styles/bootstrap.scss";
+
+  .font-lubri {
+    font-family: var(--font-lubri), sans-serif;
+  }
+</style>
