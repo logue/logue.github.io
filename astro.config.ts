@@ -9,6 +9,7 @@ import partytown from "@astrojs/partytown";
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://logue.dev",
   integrations: [
     icon(),
     partytown({
