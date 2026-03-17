@@ -7,9 +7,13 @@ import {
 import icon from "astro-icon";
 import partytown from "@astrojs/partytown";
 
+import cloudflare from "@astrojs/cloudflare";
+
 // https://astro.build/config
 export default defineConfig({
+  output: "server",
   site: "https://logue.dev",
+
   integrations: [
     icon(),
     partytown({
@@ -18,6 +22,7 @@ export default defineConfig({
       },
     }),
   ],
+
   fonts: [
     {
       provider: fontProviders.local(),
@@ -41,7 +46,27 @@ export default defineConfig({
       fallbacks: ["sans-serif"],
     },
   ],
+
   image: {
     service: passthroughImageService(),
   },
+
+  server: {
+    port: 4321,
+  },
+
+  vite: {
+    server: {
+      strictPort: true,
+    },
+    resolve: {
+      alias: {
+        debug: "/src/shims/debug.ts",
+      },
+    },
+  },
+
+  adapter: cloudflare({
+    prerenderEnvironment: "node",
+  }),
 });
