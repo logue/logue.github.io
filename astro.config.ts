@@ -11,8 +11,14 @@ import cloudflare from "@astrojs/cloudflare";
 
 // https://astro.build/config
 export default defineConfig({
+  adapter: cloudflare(),
   output: "server",
   site: "https://logue.dev",
+
+  build: {
+    client: "./",
+    server: "./_worker.js",
+  },
 
   integrations: [
     icon(),
@@ -64,9 +70,8 @@ export default defineConfig({
         debug: "/src/shims/debug.ts",
       },
     },
+    build: {
+      minify: false,
+    },
   },
-
-  adapter: cloudflare({
-    prerenderEnvironment: "node",
-  }),
 });
