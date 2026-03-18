@@ -1,0 +1,13 @@
+<template>
+  <div class="scanline-overlay position-fixed top-0 left-0 w-100 h-100"></div>
+</template>
+
+<style scoped>
+/* 走査線オーバーレイ */
+.scanline-overlay {
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%);
+  background-size: 100% 4px;
+  z-index: 2;
+  pointer-events: none;
+}
+</style>

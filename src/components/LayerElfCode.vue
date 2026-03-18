@@ -1,6 +1,7 @@
-<pre
-  class="position-fixed top-0 left-0 h-100 w-100 overflow-hidden mx-3 my-3">
-<span style="color: var(--color-green)">7f 45 4c 46</span> 02 01 01 00  <span style="color: var(--color-blue)">//</span> <span style="color:var(--color-green)">.ELF</span>....
+<template>
+  <pre
+    class="position-fixed top-0 left-0 h-100 w-100 overflow-hidden mx-3 my-3"
+  ><span style="color: var(--color-green)">7f 45 4c 46</span> 02 01 01 00  <span style="color: var(--color-blue)">//</span> <span style="color:var(--color-green)">.ELF</span>....
 00 00 00 00 00 00 00 00  <span style="color: var(--color-blue)">//</span> ........
 <span style="color: var(--color-red)">b7</span> 00 3e 00 01 00 00 00  <span style="color: var(--color-blue)">//</span> <span style="color: var(--color-red)">.</span>.&gt;.....
 50 18 <span style="color: var(--bs-gray-300)">40</span> 00 00 00 00 00  <span style="color: var(--color-blue)">//</span> P.<span style="color: var(--bs-gray-100)">@</span>.....
@@ -18,29 +19,28 @@ b8 b5 00 00 00 00 00 00  <span style="color: var(--color-blue)">//</span> ......
 00 00 <span style="color: var(--bs-gray-300)">40</span> 00 00 00 00 00  <span style="color: var(--color-blue)">//</span> ..<span style="color: var(--bs-gray-100)">@</span>.....
 d0 15 00 00 00 00 00 00  <span style="color: var(--color-blue)">//</span> ........
 d0 15 00 00 00 00 00 00  <span style="color: var(--color-blue)">//</span> ........
-00 00 20 00 00 00 00 00  <span style="color: var(--color-blue)">//</span> .. .....
-</pre>
+00 00 20 00 00 00 00 00  <span style="color: var(--color-blue)">//</span> .. .....</pre>
+</template>
 
-<style>
-  pre {
-    /* gray-500 (#adb5bd) は hard-light で背景を明るくするのに絶妙な輝度です */
-    color: var(--bs-gray-500);
+<style scoped>
+pre {
+  /* gray-500 (#adb5bd) は hard-light で背景を明るくするのに絶妙な輝度 */
+  color: var(--bs-gray-500);
 
-    /* ブレンドモードを有効化 */
-    mix-blend-mode: hard-light;
+  /* ブレンドモードを有効化 */
+  mix-blend-mode: hard-light;
 
-    /* 文字が背景に沈まないよう、不透明度を調整（0.15だと薄すぎるかもしれません） */
-    opacity: 0.4;
+  /* 文字が背景に沈まないよう、不透明度を調整 */
+  opacity: 0.4;
 
-    z-index: -1; /* 背景画像のすぐ上に配置 */
-    pointer-events: none;
-    font-size: 3rem;
-    font-family: var(--font-ocra), monospace;
-    line-height: 1.1;
-  }
+  z-index: -1; /* 背景画像のすぐ上に配置 */
+  pointer-events: none;
+  font-size: 3rem;
+  font-family: var(--font-ocra), monospace;
+  line-height: 1.1;
+}
 
-  pre span:hover {
-    /* 素材辞典の回路図の上を通るときだけ光るような演出 */
-    text-shadow: 0 0 5px rgba(173, 181, 189, 0.3);
-  }
+pre span:hover {
+  text-shadow: 0 0 5px rgba(173, 181, 189, 0.3);
+}
 </style>
