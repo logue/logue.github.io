@@ -25,7 +25,10 @@ $color-red: #ff8a80;
 // 2. Include any default variable overrides here
 $font-family-sans-serif: var(--font-ocra), monospace;
 $body-color: $hud-cyan;
-$body-bg: $konpeki-deep;
+$body-bg: #212529;
+$primary: #4a5d7e; // 影の青みに合わせたブルーグレー
+$card-bg: rgba(255, 255, 255, 0.6); // 背景を透かして「光」を取り込む
+$border-color: rgba(33, 37, 41, 0.1); // 影の色を薄く使ったボーダー
 $tooltip-color: $color-green;
 
 // 3. Include remainder of required Bootstrap stylesheets (including any separate color mode stylesheets)

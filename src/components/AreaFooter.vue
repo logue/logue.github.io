@@ -1,5 +1,5 @@
 <template>
-  <footer class="mt-auto text-center opacity-50">
+  <footer class="mt-auto text-center opacity-50 z-1">
     <p class="small">
       ACCESS_GRANTED //
       <span class="text-danger">SYSTEM_STABLE</span>

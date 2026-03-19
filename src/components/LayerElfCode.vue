@@ -27,11 +27,20 @@ pre {
   /* gray-500 (#adb5bd) は hard-light で背景を明るくするのに絶妙な輝度 */
   color: var(--bs-gray-500);
 
+  /* 多重シャドウで光の広がりを作る */
+  /*
+  text-shadow:
+    0 0 5px #fffde7,
+    0 0 10px rgba(255, 253, 231, 0.8),
+    0 0 20px rgba(255, 253, 231, 0.5);
+  filter: brightness(1.5) saturate(1.2);
+  */
+
   /* ブレンドモードを有効化 */
   mix-blend-mode: hard-light;
 
   /* 文字が背景に沈まないよう、不透明度を調整 */
-  opacity: 0.4;
+  /* opacity: 0.4; */
 
   z-index: -1; /* 背景画像のすぐ上に配置 */
   pointer-events: none;

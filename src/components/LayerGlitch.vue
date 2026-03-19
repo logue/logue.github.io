@@ -1,9 +1,19 @@
 <script setup lang="ts">
+import { onMounted, onUnmounted, ref } from 'vue';
+
 import bgsrc from '@/assets/bg.png';
+
+const scrollY = ref(0);
+const handleScroll = () => {
+  scrollY.value = window.scrollY;
+};
+
+onMounted(() => window.addEventListener('scroll', handleScroll));
+onUnmounted(() => window.removeEventListener('scroll', handleScroll));
 </script>
 
 <template>
-  <div class="position-fixed top-0 left-0 w-100 h-100 bg-layer">
+  <div class="position-fixed top-0 left-0 w-100 h-100 z-n1 glitch-container">
     <div
       class="glitch w-100 h-100"
       :style="`background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url(${bgsrc});`"
@@ -68,9 +78,9 @@ $glitch-interval: math.div($glitch-duration, $glitch-frequency);
   animation: glitch-#{$name} $animation-duration linear infinite alternate both;
 }
 
-/* 背景グリッチ */
-.bg-layer {
-  z-index: -2;
+.slice {
+  background-size: cover;
+  background-position: center;
 }
 
 .glitch {

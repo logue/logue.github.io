@@ -1,5 +1,5 @@
 <template>
-  <header class="mb-auto">
+  <header class="mb-auto z-1">
     <div class="container">
       <h3 class="float-md-start mb-0 font-lubri">.ELF_LOADED</h3>
       <nav class="nav nav-masthead justify-content-center float-md-end">

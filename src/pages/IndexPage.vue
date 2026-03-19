@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import SocialLinks from '@/components/SocialLinks.vue';
+import VrmCanvas from '@/components/VrmCanvas.vue';
 
 const accomplishments = [
   { id: 'OSS', label: 'VUE-CODEMIRROR6', detail: '1.8M+ DL/YR' },
@@ -15,6 +16,8 @@ const accomplishments = [
     <br />
     REVERSE-ENGINEERING THE STACK TO MANIFEST THE IDEAL UX.
   </p>
+
+  <VrmCanvas />
 
   <div class="row g-4 text-start mt-5 border-top border-bottom border-secondary py-4">
     <div v-for="item in accomplishments" :key="item.id" class="col-md-4">
