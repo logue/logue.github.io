@@ -2,6 +2,7 @@
 interface Env {
   VROID_CLIENT_ID: string;
   VROID_CLIENT_SECRET: string;
+  TOKEN_STORE?: KVNamespace;
 }
 
 /**
@@ -81,20 +82,20 @@ export const onRequestGet: PagesFunction<Env> = async context => {
     );
   }
 
+  // KV にリフレッシュトークンを保存（以降の自動ローテーションに使用）
+  if (env.TOKEN_STORE) {
+    await env.TOKEN_STORE.put('vroid_refresh_token', tokenData.refresh_token);
+  }
+
   const html = `<!DOCTYPE html>
 <html lang="ja">
 <head><meta charset="UTF-8"><title>VRoid Auth Setup</title></head>
 <body style="font-family:monospace;padding:2rem;max-width:800px">
-  <h2>認証成功</h2>
-  <p>以下の <code>refresh_token</code> を <code>.dev.vars</code> と
-  Cloudflare Pages の環境変数 <strong>VROID_REFRESH_TOKEN</strong> に設定してください。</p>
+  <h2>認証成功 ✅</h2>
+  <p>refresh_token を KV ストアに保存しました。以降は自動でトークンがローテーションされます。</p>
+  <p>初回のみ、以下の値を <code>.dev.vars</code> の <strong>VROID_REFRESH_TOKEN</strong> にも設定してください（KV が空の場合のフォールバック用）。</p>
   <h3>refresh_token</h3>
   <textarea rows="3" style="width:100%;font-size:0.85em">${tokenData.refresh_token}</textarea>
-  <h3>設定方法</h3>
-  <ol>
-    <li><code>.dev.vars</code> の <code>VROID_REFRESH_TOKEN=</code> に上記のトークンを貼り付ける</li>
-    <li>Cloudflare Pages ダッシュボード → Settings → Environment Variables に <code>VROID_REFRESH_TOKEN</code> を追加する</li>
-  </ol>
   <details><summary>フルレスポンス</summary><pre>${JSON.stringify(tokenData, null, 2)}</pre></details>
 </body>
 </html>`;

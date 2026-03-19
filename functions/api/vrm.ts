@@ -3,80 +3,94 @@ interface Env {
   VROID_CLIENT_ID: string;
   VROID_CLIENT_SECRET: string;
   VROID_AVATAR_ID: string;
-  VROID_REFRESH_TOKEN: string;
+  VROID_REFRESH_TOKEN: string; // 初回セットアップ時の初期値。以後は KV が優先される
+  TOKEN_STORE?: KVNamespace;
 }
+
+const KV_REFRESH_TOKEN_KEY = 'vroid_refresh_token';
 
 export const onRequest: PagesFunction<Env> = async context => {
   const { env } = context;
 
-  try {
-    if (!env.VROID_REFRESH_TOKEN) {
-      return new Response(
-        JSON.stringify({ error: 'VROID_REFRESH_TOKEN is not set. Visit /api/auth to authorize.' }),
-        { status: 503, headers: { 'Content-Type': 'application/json' } }
-      );
-    }
+  // KV に保存済みのリフレッシュトークンを優先し、なければ env var を使用
+  const storedRefreshToken = await env.TOKEN_STORE?.get(KV_REFRESH_TOKEN_KEY);
+  const refreshToken = storedRefreshToken ?? env.VROID_REFRESH_TOKEN;
 
-    // 1. refresh_token を使って access_token を取得
-    // (VRoid Hub は client_credentials 非対応のため authorization_code フローが必要)
-    const tokenRes = await fetch('https://hub.vroid.com/oauth/token', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'X-Api-Version': '11'
-      },
-      body: new URLSearchParams({
-        grant_type: 'refresh_token',
-        client_id: env.VROID_CLIENT_ID,
-        client_secret: env.VROID_CLIENT_SECRET,
-        refresh_token: env.VROID_REFRESH_TOKEN
-      })
-    });
-
-    const tokenData: any = await tokenRes.json();
-
-    if (!tokenData.access_token) {
-      console.error('Token refresh failed:', JSON.stringify(tokenData));
-      return new Response(JSON.stringify({ error: 'Token refresh failed', detail: tokenData }), {
-        status: 401,
-        headers: { 'Content-Type': 'application/json' }
-      });
-    }
-
-    // 2. モデルの最新URLを取得
-    const modelRes = await fetch(
-      `https://hub.vroid.com/api/character_models/${env.VROID_AVATAR_ID}`,
-      {
-        headers: { Authorization: `Bearer ${tokenData.access_token}` }
-      }
+  if (!refreshToken) {
+    return new Response(
+      JSON.stringify({ error: 'VROID_REFRESH_TOKEN is not set. Visit /api/auth to authorize.' }),
+      { status: 503, headers: { 'Content-Type': 'application/json' } }
     );
+  }
 
-    // modelRes を受け取った後の処理を以下のように修正
-    const modelData: any = await modelRes.json();
+  const apiHeaders = (token: string) => ({
+    Authorization: `Bearer ${token}`,
+    'X-Api-Version': '11'
+  });
 
-    // デバッグ用: 実際にどんなデータが来ているかログに出す (Wranglerのターミナルを確認)
-    console.log('VRoid API Response:', JSON.stringify(modelData, null, 2));
+  // 1. refresh_token で access_token を取得
+  // VRoid Hub はローテーション方式のため、レスポンスの新しい refresh_token を KV に保存する
+  const tokenRes = await fetch('https://hub.vroid.com/oauth/token', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'X-Api-Version': '11' },
+    body: new URLSearchParams({
+      grant_type: 'refresh_token',
+      client_id: env.VROID_CLIENT_ID,
+      client_secret: env.VROID_CLIENT_SECRET,
+      refresh_token: refreshToken
+    })
+  });
+  const tokenData: any = await tokenRes.json();
 
-    // 安全なアクセス
-    const modelVersion = modelData.character_model?.latest_character_model_version;
-
-    if (!modelVersion) {
-      return new Response(
-        JSON.stringify({
-          error: 'Model version not found',
-          detail:
-            'The character exists, but the latest_character_model_version is missing. Check if the model is public.'
-        }),
-        { status: 404 }
-      );
-    }
-
-    const downloadUrl = modelVersion.download_url;
-    // 3. フロント(Vue)に返す
-    return new Response(JSON.stringify({ url: downloadUrl }), {
+  if (!tokenData.access_token) {
+    console.error('Token refresh failed:', JSON.stringify(tokenData));
+    return new Response(JSON.stringify({ error: 'Token refresh failed', detail: tokenData }), {
+      status: 401,
       headers: { 'Content-Type': 'application/json' }
     });
-  } catch (e: any) {
-    return new Response(JSON.stringify({ error: e.message }), { status: 500 });
   }
+
+  // 新しい refresh_token が返ってきた場合は KV に保存（トークンローテーション対応）
+  if (tokenData.refresh_token && env.TOKEN_STORE) {
+    await env.TOKEN_STORE.put(KV_REFRESH_TOKEN_KEY, tokenData.refresh_token);
+  }
+
+  const accessToken: string = tokenData.access_token;
+
+  // 2. ダウンロードライセンスを発行 (character_model_id = VROID_AVATAR_ID)
+  const licenseRes = await fetch('https://hub.vroid.com/api/download_licenses', {
+    method: 'POST',
+    headers: { ...apiHeaders(accessToken), 'Content-Type': 'application/json' },
+    body: JSON.stringify({ character_model_id: env.VROID_AVATAR_ID })
+  });
+  const licenseData: any = await licenseRes.json();
+  const licenseId: string | undefined = licenseData?.data?.id;
+
+  if (!licenseId) {
+    console.error('Download license issue failed:', JSON.stringify(licenseData));
+    return new Response(
+      JSON.stringify({ error: 'Failed to issue download license', detail: licenseData }),
+      { status: licenseRes.status, headers: { 'Content-Type': 'application/json' } }
+    );
+  }
+
+  // 3. ダウンロードライセンスから S3 presigned URL を取得 (302 リダイレクト)
+  const downloadRes = await fetch(
+    `https://hub.vroid.com/api/download_licenses/${licenseId}/download`,
+    { headers: apiHeaders(accessToken), redirect: 'manual' }
+  );
+  const vrmUrl = downloadRes.headers.get('Location');
+
+  if (!vrmUrl) {
+    console.error('Download redirect missing, status:', downloadRes.status);
+    return new Response(
+      JSON.stringify({ error: 'Failed to get VRM download URL', status: downloadRes.status }),
+      { status: 502, headers: { 'Content-Type': 'application/json' } }
+    );
+  }
+
+  // 4. フロント(Vue)に S3 presigned URL を返す
+  return new Response(JSON.stringify({ url: vrmUrl }), {
+    headers: { 'Content-Type': 'application/json' }
+  });
 };
