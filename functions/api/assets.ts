@@ -1,6 +1,15 @@
-const ALLOWED_FILE_RE = /^[\w-][\w/-]*\.(zip|ogg)$/i;
+/** 許可するファイルのマッチパターン */
+const ALLOWED_FILE_RE = /^[\w-][\w/-]*\.(zip|ogg|mov)$/i;
 
-export const onRequestGet: PagesFunction = async context => {
+interface Env {
+  ASSET_HOST: string;
+}
+
+/**
+ * 共通アセット配信 Worker で独立して動作し、Pages 側のプロキシ経由、
+ * または許可されたドメインからの直接アクセスを処理します。
+ */
+export const onRequestGet: PagesFunction<Env> = async context => {
   const url = new URL(context.request.url);
   const file = url.searchParams.get('file');
 
@@ -17,7 +26,7 @@ export const onRequestGet: PagesFunction = async context => {
     const assetUrl = `${context.env.ASSET_HOST}/${file}`;
     console.log(`Fetching asset from: ${assetUrl}`);
     // ブラウザの Referer を転送。なければ自ページの Origin を使用。
-    // worker 側の許可チェック（Referer/Origin ヘッダーで logue.dev が含まれているか判定）に通すため、
+    // worker 側の許可チェック（Referer/Origin ヘッダーで実行元のドメインが含まれているか判定）に通すため、
     // url.origin だけでなく Origin ヘッダーも明示的に送る。
     const fetchHeaders: Record<string, string> = {
       Referer: context.request.headers.get('Referer') ?? `${url.origin}/`,
@@ -28,6 +37,7 @@ export const onRequestGet: PagesFunction = async context => {
     const range = context.request.headers.get('Range');
     if (range) fetchHeaders['Range'] = range;
 
+    // アセットを取得
     const assetRes = await fetch(assetUrl, { headers: fetchHeaders });
 
     if (!assetRes.ok) {
@@ -56,3 +66,7 @@ export const onRequestGet: PagesFunction = async context => {
     });
   }
 };
+
+// まぁ、普通に考えてアセットサーバーの情報は.envに入れるべきだよね。 --- IGNORE ---
+// 当然、ソースコードにそれらの情報は書かれていないｗｗｗ --- IGNORE ---
+// 💡ヒント： env.d.ts はちゃんと書いておけよ。 --- IGNORE ---

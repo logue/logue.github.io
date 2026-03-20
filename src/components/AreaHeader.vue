@@ -1,14 +1,41 @@
+<script setup lang="ts">
+import { ref } from 'vue';
+
+const isOpen = ref(false);
+</script>
+
 <template>
-  <header class="mb-auto z-1">
-    <div class="container">
-      <h3 class="float-md-start mb-0 font-lubri">.ELF_LOADED</h3>
-      <nav class="nav nav-masthead justify-content-center float-md-end">
-        <a class="nav-link py-1 px-0 active" aria-current="page" href="#">HOME</a>
-        <a class="nav-link py-1 px-0 ms-3" href="https://github.com/logue">GITHUB</a>
-        <a class="nav-link py-1 px-0 ms-3" href="https://x.com/logue256">X_LOG</a>
-      </nav>
-    </div>
+  <header>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">.ELF_LOADED</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          :aria-expanded="isOpen"
+          aria-controls="navbarCollapse"
+          aria-label="Toggle navigation"
+          @click="isOpen = !isOpen"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          id="navbarCollapse"
+          class="navbar-collapse"
+          :class="isOpen ? 'collapse show' : 'collapse'"
+        >
+          <ul class="navbar-nav ms-auto mb-2 mb-md-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">HOME</a>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="https://github.com/logue">GITHUB</a></li>
+            <li class="nav-item"><a class="nav-link" href="https://x.com/logue256">X_LOG</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
   </header>
+  <!-- オーソドックスなbootstrapのナビゲーションバー --- IGNORE -->
 </template>
 
 <style scoped>

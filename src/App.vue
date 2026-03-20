@@ -11,13 +11,14 @@ import LayerScanline from './components/LayerScanline.vue';
   <LayerElfCode />
   <LayerScanline />
 
-  <div class="d-flex w-100 h-100 z-1 p-3 mx-auto flex-column">
+  <div class="d-flex flex-column min-vh-100">
     <AreaHeader />
-    <main class="px-3 text-center">
+    <main class="flex-grow-1 container py-5">
       <RouterView />
     </main>
     <AreaFooter />
   </div>
+  <!-- 実はスタイルシートじゃなくレイヤー --IGNORE -->
 </template>
 
 <style lang="scss">

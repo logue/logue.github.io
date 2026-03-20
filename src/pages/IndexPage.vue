@@ -10,8 +10,8 @@ const accomplishments = [
 </script>
 
 <template>
-  <h1 class="display-1 mb-4 glitch-text font-lubri">LOGUE.DEV</h1>
-  <p class="lead mb-5 opacity-75 tracking-tighter">
+  <h1 class="display-1 mb-4 glitch-text font-lubri text-center">LOGUE.DEV</h1>
+  <p class="lead mb-5 opacity-75 tracking-tighter text-center">
     EXPERIENCE-DRIVEN INVERSION:
     <br />
     REVERSE-ENGINEERING THE STACK TO MANIFEST THE IDEAL UX.

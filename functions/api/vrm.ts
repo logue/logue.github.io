@@ -94,3 +94,6 @@ export const onRequest: PagesFunction<Env> = async context => {
     headers: { 'Content-Type': 'application/json' }
   });
 };
+
+// 私は正直者なので、アセットサーバーに VRM ファイルを置かず、VRoid Hub の API を叩いてデータを取得する形にしている。 --- IGNORE ---
+// アバターをサイトに埋め込む前に、そのアバターで使用しているアセットのライセンスにも従っているかどうかをちゃんと確認しようね。--- IGNORE ---

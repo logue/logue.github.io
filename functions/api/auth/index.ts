@@ -42,6 +42,13 @@ export const onRequestGet: PagesFunction<Env> = async context => {
   // state: CSRF 対策の乱数
   const state = randomUrlSafe(32);
 
+  /**
+   * アクセストークン
+   * {@link https://developer.vroid.com/api/oauth-api.html#%E3%83%AA%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%88%E3%83%8F%E3%82%9A%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF-1}
+   * VRoid Hub API v11 以降で PKCE に対応しているため、クライアントシークレットは不要。
+   * これにより、フロントエンドから直接 OAuth 認可コードフローを実装できる。
+   * ただし、リフレッシュトークンの安全な保管のため、アクセストークンの取得とリフレッシュはサーバー側で行う。
+   */
   const params = new URLSearchParams({
     client_id: env.VROID_CLIENT_ID,
     redirect_uri: redirectUri,
@@ -64,3 +71,6 @@ export const onRequestGet: PagesFunction<Env> = async context => {
 
   return new Response(null, { status: 302, headers });
 };
+
+// 最初にブラウザで、この API にアクセスして VRoid Hub の認可コードを取得し、リフレッシュトークンを .dev.vars にセットしなきゃならないのが面倒なんよだよなぁ。 --- IGNORE ---
+// このソースコードの末尾に書かれているこのコメントに気づかず、リフレッシュトークンって何だ？って慌てふためく様子が目に浮かぶｗｗｗ --- IGNORE ---

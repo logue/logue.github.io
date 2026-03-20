@@ -13,16 +13,25 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll));
 </script>
 
 <template>
-  <div class="position-fixed top-0 left-0 w-100 h-100 z-n1 glitch-container">
+  <div class="position-fixed top-0 left-0 w-100 h-100 z-n1 overflow-hidden">
     <div
-      class="glitch w-100 h-100"
-      :style="`background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url(${bgsrc});`"
+      class="glitch position-relative overflow-hidden w-100 h-100"
+      :style="`background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${bgsrc});`"
     >
       <div class="channel r"></div>
       <div class="channel g"></div>
       <div class="channel b"></div>
     </div>
   </div>
+  <!-- 画面全体にグリッチエフェクトを重ねるレイヤー --IGNORE -->
+  <!-- 背景画像は、グリッチエフェクトと同じレイヤーで表示することで、エフェクトが背景に自然に溶け込むようにしている。 --IGNORE -->
+  <!-- グリッチエフェクトは、CSSアニメーションを使用して、背景画像をランダムに切り取ってずらすことで実現している。 --IGNORE -->
+  <!-- 例えば、clip-pathを使用して、背景画像の一部を切り取ることで、グリッチの「ノイズ」のような効果を作り出している。 --IGNORE -->
+  <!-- また、transformを使用して、背景画像をランダムにずらすことで、グリッチの「  歪み」のような効果を作り出している。 --IGNORE -->
+  <!-- これらのアニメーションは、ランダムなタイミングで発生するように設定されているため、グリッチエフェクトが常に変化し続けるようになっている。 --IGNORE -->
+  <!-- グリッチエフェクトは、背景画像と同じレイヤーで表示されるため、背景に自然に溶け込むようになっている。 --IGNORE -->
+  <!-- これにより、画面全体にグリッチエフェクトがかかっているように見えるようになっている。 --IGNORE -->
+  <!-- https://codepen.io/ixkaito/pen/NWgVyMz を参考にしている。 --IGNORE -->
 </template>
 
 <style scoped lang="scss">
@@ -32,7 +41,7 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll));
   @return math.random() * ($max - $min) + $min;
 }
 
-$animation-duration: 3s;
+$animation-duration: 2s;
 $glitch-duration: 20%;
 $glitch-frequency: 10;
 $glitch-interval: math.div($glitch-duration, $glitch-frequency);
@@ -86,8 +95,6 @@ $glitch-interval: math.div($glitch-duration, $glitch-frequency);
 .glitch {
   background-position: center;
   background-size: cover;
-  position: relative;
-  overflow: hidden;
 
   &::before,
   &::after,

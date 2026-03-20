@@ -3,7 +3,7 @@
 import { onMounted, ref, onUnmounted } from 'vue';
 
 import { VRMLoaderPlugin, VRM } from '@pixiv/three-vrm';
-import { VRMAnimationLoaderPlugin } from '@pixiv/three-vrm-animation';
+import { VRMAnimationLoaderPlugin, createVRMAnimationClip } from '@pixiv/three-vrm-animation';
 import * as THREE from 'three';
 // @ts-ignore
 import { GLTFLoader, type GLTFParser, type GLTF } from 'three/examples/jsm/loaders/GLTFLoader';
@@ -22,6 +22,27 @@ let renderer: THREE.WebGLRenderer;
 let frameId: number;
 let mixer: THREE.AnimationMixer | null = null;
 let clock: THREE.Clock;
+let currentVrm: VRM | null = null;
+let camera: THREE.PerspectiveCamera;
+const pivot = new THREE.Object3D();
+
+// --- Drag rotation ---
+let isDragging = false;
+let prevClientX = 0;
+
+function onPointerDown(e: PointerEvent) {
+  isDragging = true;
+  prevClientX = e.clientX;
+}
+function onPointerMove(e: PointerEvent) {
+  if (!isDragging) return;
+  const dx = e.clientX - prevClientX;
+  prevClientX = e.clientX;
+  pivot.rotation.y += dx * 0.01;
+}
+function onPointerUp() {
+  isDragging = false;
+}
 
 onMounted(async () => {
   if (!canvasRef.value) return;
@@ -29,8 +50,11 @@ onMounted(async () => {
   // --- Scene Setup ---
   const scene = new THREE.Scene();
   clock = new THREE.Clock();
-  const camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 0.1, 20);
-  camera.position.set(0, 1.4, 3.5);
+  camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 0.1, 20);
+  // カメラは、VRMモデルの全身が見えるように、やや高い位置から斜めに見下ろす感じで配置する。
+  camera.position.set(0, 0.9, 5.0);
+  // カメラの向きは、VRMモデルの中心を見つめるように設定する。
+  camera.lookAt(0, 0.9, 0);
 
   renderer = new THREE.WebGLRenderer({
     canvas: canvasRef.value,
@@ -51,11 +75,17 @@ onMounted(async () => {
     frameId = requestAnimationFrame(update);
     const delta = clock.getDelta();
     mixer?.update(delta);
+    currentVrm?.update(delta);
     renderer.render(scene, camera);
   };
   update();
 
   window.addEventListener('resize', onResize);
+  canvasRef.value!.addEventListener('pointerdown', onPointerDown);
+  window.addEventListener('pointermove', onPointerMove);
+  window.addEventListener('pointerup', onPointerUp);
+
+  scene.add(pivot);
 
   // 1. Cloudflare Functions から URL を取得
   let url: string;
@@ -89,7 +119,8 @@ onMounted(async () => {
         console.error('VRM not found in gltf.userData.vrm');
         return;
       }
-      scene.add(vrm.scene);
+      pivot.add(vrm.scene);
+      currentVrm = vrm;
 
       setupVrmAnimation(vrm, loader)
         .then(m => {
@@ -106,72 +137,73 @@ onMounted(async () => {
 });
 
 const onResize = () => {
-  // renderer と camera のアスペクト比を更新
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(window.devicePixelRatio);
 };
 
 onUnmounted(() => {
   cancelAnimationFrame(frameId);
   window.removeEventListener('resize', onResize);
+  window.removeEventListener('pointermove', onPointerMove);
+  window.removeEventListener('pointerup', onPointerUp);
   renderer?.dispose();
 });
 
 // VRMロード後のメイン処理
 const setupVrmAnimation = async (vrm: VRM, loader: GLTFLoader) => {
-  try {
-    // 1. composable を使い、ZIP内の特定のVRMAファイルを ArrayBuffer として取得
-    const vrmaBuffer = await decompressMotion('VRMA_MotionPack.zip', 'vrma/VRMA_01.vrma');
+  console.log('Setting up VRM animation...');
+  // 1. composable を使い、ZIP内の特定のVRMAファイルを ArrayBuffer として取得
+  const vrmaBuffer = await decompressMotion(
+    'VRMA_MotionPack.zip',
+    'VRMA_MotionPack/vrma/VRMA_01.vrma'
+  );
 
-    // 2. ArrayBuffer を Blob URL に変換して GLTFLoader に食わせる
-    // (VRMAは内部的にGLB形式なので GLTFLoader でパース可能です)
-    const vrmaBlob = new Blob([vrmaBuffer], { type: 'application/octet-stream' });
-    const vrmaUrl = URL.createObjectURL(vrmaBlob);
+  // 2. ArrayBuffer を Blob URL に変換して GLTFLoader に食わせる
+  // (VRMAは内部的にGLB形式なので GLTFLoader でパース可能です)
+  const vrmaBlob = new Blob([vrmaBuffer], { type: 'application/octet-stream' });
+  const vrmaUrl = URL.createObjectURL(vrmaBlob);
 
-    // 3. VRMAファイルをパース
-    const vrmaGltf = await loader.loadAsync(vrmaUrl);
+  // 3. VRMAファイルをパース
+  const vrmaGltf = await loader.loadAsync(vrmaUrl);
+  console.log('VRMA loaded and parsed:', vrmaGltf);
 
-    // 4. VRMAnimation インスタンスから AnimationClip を作成
-    const vrmAnimations = vrmaGltf.userData.vrmAnimations;
-    if (vrmAnimations && vrmAnimations.length > 0) {
-      const clip = vrmAnimations[0].createAnimationClip(vrm);
+  // 4. VRMAnimation インスタンスから AnimationClip を作成
+  const vrmAnimations = vrmaGltf.userData.vrmAnimations;
+  if (vrmAnimations && vrmAnimations.length > 0) {
+    const clip = createVRMAnimationClip(vrmAnimations[0], vrm);
 
-      // 5. Mixerを作成して再生
-      const mixer = new THREE.AnimationMixer(vrm.scene);
-      const action = mixer.clipAction(clip);
-      action.play();
+    // 5. Mixerを作成して再生
+    const mixer = new THREE.AnimationMixer(vrm.scene);
+    const action = mixer.clipAction(clip);
+    action.play();
 
-      // メモリ解放
-      URL.revokeObjectURL(vrmaUrl);
+    // メモリ解放
+    URL.revokeObjectURL(vrmaUrl);
 
-      return mixer; // updateループで使うために返す
-    }
-  } catch (error) {
-    console.error('Failed to load VRMA:', error);
+    return mixer; // updateループで使うために返す
   }
 };
 </script>
 
 <template>
-  <div class="vrm-stage position-relative w-100 h-100">
-    <canvas ref="canvasRef" class="position-fixed top-0 left-0 w-100 h-100 vrm-canvas"></canvas>
-    <div
-      v-if="isLoading"
-      class="loading-overlay d-flex flex-column align-items-center justify-content-center position-fixed top-0 start-0 w-100 h-100"
-    >
-      <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem">
-        <span class="visually-hidden">Loading...</span>
-      </div>
-      <div class="mt-3 text-monospace small opacity-75">
-        SYS_INITIALIZING...
-        <br />
-        ACCESSING_VROID_HUB...
-      </div>
+  <div v-if="isLoading" class="d-flex justify-content-center align-items-center flex-column h-50">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <div class="mt-3 small opacity-75">
+      SYS_INITIALIZING...
+      <br />
+      ACCESSING_VROID_HUB...
     </div>
   </div>
+  <canvas
+    ref="canvasRef"
+    class="position-fixed top-0 start-0 z-3"
+    :class="{ 'd-none': isLoading }"
+  ></canvas>
+  <!-- VRMモデルを表示するためのキャンバス --IGNORE -->
+  <!-- ローディング中は、Bootstrapのスピナーとテキストで状態を表示する。 --- IGNORE -->
+  <!-- ローディングが完了すると、キャンバスが表示され、VRMモデルがレンダリングされる。 --- IGNORE -->
 </template>
-
-<style scoped>
-.vrm-canvas {
-  z-index: -1; /* 背景として配置 */
-  /* pointer-events: none; */ /* 後でインタラクションを追加するかも */
-}
-</style>

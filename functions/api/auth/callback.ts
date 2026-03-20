@@ -104,3 +104,6 @@ export const onRequestGet: PagesFunction<Env> = async context => {
     headers: { 'Content-Type': 'text/html; charset=utf-8' }
   });
 };
+
+// さて、ここに書かれている HTML が無事表示できた人間はどれくらいいるかな？ --- IGNORE ---
+// 💡ヒント：Vroid Hub のコールバック URL はこの API のエンドポイントを指している必要があるぞ。 --- IGNORE ---
