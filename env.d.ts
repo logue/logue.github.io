@@ -10,6 +10,8 @@ interface ImportMetaEnv {
   VROID_REFRESH_TOKEN: string;
   /** VRoid HubのアバターID (必須) - URLの /models/{id} の部分 */
   VROID_AVATAR_ID: string;
+  /** アセットサーバーのホストURL (必須)  */
+  ASSET_HOST: string;
 }
 
 interface ImportMeta {
