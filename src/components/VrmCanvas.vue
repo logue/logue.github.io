@@ -25,9 +25,9 @@ useThreeScene(
   () => mixer.value,
   {
     position: { x: 0, y: 0.5, z: 7 },
-    ambientLight: { color: 0xf8f9fa, intensity: 0.4 },
+    ambientLight: { color: 0xf8f9fa, intensity: 1.2 },
     directionalLight: { color: 0xfffde7, intensity: 1 },
-    directionalLightPosition: { x: 1, y: 1, z: 2 },
+    directionalLightPosition: { x: 0, y: 1, z: 2 },
     perspectiveCamera: { fov: 15, near: 0.1, far: 20 }
   }
 );

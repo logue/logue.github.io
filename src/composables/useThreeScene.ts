@@ -83,6 +83,8 @@ export function useThreeScene(
     });
     renderer.setSize(initW, initH, false);
     renderer.setPixelRatio(window.devicePixelRatio);
+    // 色空間の設定。これをしないと、VRMモデルの色が暗くなってしまう。 -- IGNORE
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
 
     /** シーンの設定 */
     const scene = new THREE.Scene();
