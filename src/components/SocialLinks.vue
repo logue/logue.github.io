@@ -4,7 +4,16 @@ import { onMounted } from 'vue';
 import { Icon } from '@iconify/vue';
 import { Tooltip } from 'bootstrap';
 
-const links = [
+interface SocialLink {
+  /** ツールチップの内容 */
+  name: string;
+  /** リンク先の URL */
+  url: string;
+  /** アイコンの識別子 */
+  icon: string;
+}
+
+const links: SocialLink[] = [
   {
     name: 'Facebook',
     url: 'https://facebook.com/logue256',
@@ -77,7 +86,7 @@ const links = [
     url: 'https://account.xbox.com/ja-jp/Profile?Gamertag=Logue256',
     icon: 'fa6-brands:xbox'
   }
-] satisfies { name: string; url: string; icon: string }[];
+];
 
 onMounted(() => {
   const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
@@ -87,12 +96,12 @@ onMounted(() => {
 
 <template>
   <!-- eslint-disable vuejs-accessibility/anchor-has-content -->
-  <nav aria-label="External Links" class="mt-5 container">
+  <nav aria-label="External Links" class="mt-5 mx-auto text-center">
     <ul class="list-inline mb-0">
       <li v-for="(link, index) in links" :key="index" class="list-inline-item mx-2">
         <a
           :href="link.url"
-          class="cyber-icon-link"
+          class="cyber-icon-link fs-3"
           :title="link.name"
           data-bs-toggle="tooltip"
           data-bs-placement="top"
@@ -103,17 +112,15 @@ onMounted(() => {
       </li>
     </ul>
   </nav>
+  <!-- ここでは、Font Awesomeのアイコンを使用して、各ソーシャルメディアのロゴを表示している。 --- IGNORE -->
+  <!-- アイコンは、Bootstrapのツールチップと組み合わせて、ユーザーがアイコンにカーソルを合わせたときに、ツールチップが表示されるようになっている。 --- IGNORE -->
 </template>
 
 <style scoped>
 .cyber-icon-link {
-  font-size: 1.5rem;
   color: var(--bs-gray-100);
-  opacity: 0.6;
+  opacity: 0.8;
   transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
 }
 
 .cyber-icon-link:hover {
