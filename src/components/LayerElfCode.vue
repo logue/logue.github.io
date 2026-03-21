@@ -3,6 +3,7 @@ import { onMounted, onUnmounted, ref } from 'vue';
 
 const offsetY = ref(0);
 
+/** 力付くでパララックス・スクロール */
 function onScroll() {
   offsetY.value = -window.scrollY * 0.25;
 }
@@ -13,7 +14,7 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll));
 
 <template>
   <pre
-    class="position-fixed overflow-hidden top-0 left-0 w-100 pa-3"
+    class="position-fixed overflow-hidden top-0 left-0 w-100 pa-3 z-n1"
     :style="{ transform: `translateY(${offsetY}px)` }"
   ><span style="color: var(--color-green)">7f 45 4c 46</span> 02 01 01 00  <span style="color: var(--color-blue)">//</span> <span style="color:var(--color-green)">.ELF</span>....
 00 00 00 00 00 00 00 00  <span style="color: var(--color-blue)">//</span> ........
@@ -64,7 +65,6 @@ pre {
   /* 文字が背景に沈まないよう、不透明度を調整 */
   opacity: 0.5;
 
-  z-index: -1; /* 背景画像のすぐ上に配置 */
   pointer-events: none;
   font-size: 3rem;
   font-family: var(--font-ocra), monospace;

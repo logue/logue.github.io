@@ -11,7 +11,7 @@ import LayerScanline from './components/LayerScanline.vue';
   <LayerElfCode />
   <LayerScanline />
 
-  <div class="d-flex flex-column min-vh-100">
+  <div class="d-flex flex-column min-vh-100 z-1">
     <AreaHeader />
     <main class="flex-grow-1 container py-5">
       <RouterView />

@@ -1,5 +1,5 @@
 <template>
-  <div class="scanline-overlay position-fixed overflow-hidden top-0 left-0 z-2 w-100 h-100"></div>
+  <div class="scanline-overlay position-fixed overflow-hidden top-0 left-0 w-100 h-100 z-n1"></div>
   <!-- 走査線オーバーレイ --IGNORE -->
   <!-- 背景に走査線のような効果を重ねることで、古いディスプレイの雰囲気を再現している。 --IGNORE -->
   <!-- 走査線はCSSの線形グラデーションを使って作成されており、半透明の黒い線が一定の間隔で繰り返される。 --IGNORE -->

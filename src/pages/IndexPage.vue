@@ -10,8 +10,8 @@ const accomplishments = [
 </script>
 
 <template>
-  <h1 class="display-1 mb-4 glitch-text font-lubri text-center">LOGUE.DEV</h1>
-  <p class="lead mb-5 opacity-75 tracking-tighter text-center">
+  <h1 class="display-1 mb-4 text-center glitch-text font-lubri">LOGUE.DEV</h1>
+  <p class="lead mb-3 text-center">
     EXPERIENCE-DRIVEN INVERSION:
     <br />
     REVERSE-ENGINEERING THE STACK TO MANIFEST THE IDEAL UX.
@@ -19,16 +19,22 @@ const accomplishments = [
 
   <VrmCanvas />
 
-  <div class="row g-4 text-start mt-5 border-top border-bottom border-secondary py-4">
-    <div v-for="item in accomplishments" :key="item.id" class="col-md-4">
-      <div class="p-2 border-start border-info border-2">
-        <small class="d-block opacity-50 font-lubri">[{{ item.id }}]</small>
+  <div class="row mt-3 mx-auto py-4">
+    <div
+      v-for="item in accomplishments"
+      :key="item.id"
+      class="col card border-start border-info border-2"
+    >
+      <div class="card-header font-lubri opacity-50">[{{ item.id }}]</div>
+      <div class="card-body">
         <div class="fw-bold">{{ item.label }}</div>
         <div class="small opacity-75">{{ item.detail }}</div>
       </div>
     </div>
   </div>
+
   <SocialLinks />
+  <!-- どうでもいいけど、bootstrap のクラス名の順番も tailwind みたく、 linter で整形できるようにしてほしいね。 --- IGNORE -->
 </template>
 
 <style scoped>

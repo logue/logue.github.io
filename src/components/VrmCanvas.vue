@@ -22,7 +22,14 @@ useThreeScene(
   canvasRef,
   pivot,
   () => vrm.value,
-  () => mixer.value
+  () => mixer.value,
+  {
+    position: { x: 0, y: 0.5, z: 7 },
+    ambientLight: { color: 0xf8f9fa, intensity: 0.4 },
+    directionalLight: { color: 0xfffde7, intensity: 1 },
+    directionalLightPosition: { x: 1, y: 1, z: 2 },
+    perspectiveCamera: { fov: 15, near: 0.1, far: 20 }
+  }
 );
 useDragRotation(canvasRef, pivot);
 
@@ -32,22 +39,29 @@ onMounted(() => {
 </script>
 
 <template>
-  <div v-if="isLoading" class="d-flex justify-content-center align-items-center flex-column h-50">
-    <div class="spinner-border" aria-hidden="true">
-      <span class="visually-hidden">Loading...</span>
-    </div>
-    <div class="mt-3 small opacity-75">
-      SYS_INITIALIZING...
-      <br />
-      ACCESSING_VROID_HUB...
-    </div>
-  </div>
-  <canvas
-    ref="canvasRef"
-    class="position-fixed top-0 start-0 z-3"
-    :class="{ 'd-none': isLoading }"
-  ></canvas>
+  <section class="d-flex justify-content-center align-items-center flex-column my-5">
+    <template v-if="isLoading">
+      <div class="spinner-border" aria-hidden="true">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <div class="mt-3 small opacity-75">
+        SYS_INITIALIZING...
+        <br />
+        ACCESSING_VROID_HUB...
+      </div>
+    </template>
+    <canvas ref="canvasRef" class="mx-auto vrm-canvas" :class="{ 'd-none': isLoading }"></canvas>
+  </section>
   <!-- VRMモデルを表示するためのキャンバス --IGNORE -->
   <!-- ローディング中は、Bootstrapのスピナーとテキストで状態を表示する。 --- IGNORE -->
   <!-- ローディングが完了すると、キャンバスが表示され、VRMモデルがレンダリングされる。 --- IGNORE -->
 </template>
+
+<style scoped>
+.vrm-canvas {
+  height: 75vh;
+  filter: drop-shadow(3px 3px 64px 3px var(--bs-black))
+    drop-shadow(2px 2px 15px 5px var(--bs-black));
+  /* mix-blend-mode: overlay; */
+}
+</style>

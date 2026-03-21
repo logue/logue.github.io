@@ -10,6 +10,7 @@ export const useMotionLoader = () => {
   const decompressMotion = async (url: string, targetFileName: string): Promise<ArrayBuffer> => {
     console.log(`Fetching and decompressing motion from ${url}...`);
     // Cloudflare Functions プロキシ経由で取得（ブラウザからの直接アクセスは CORS で制限）
+    // なぜ、こういう仕組みなのかはuseTreeScene.tsのコメントを参照。 -- IGNORE
     const res = await fetch(`/api/assets?file=${encodeURIComponent(url)}`);
     const arrayBuffer = await res.arrayBuffer();
 
@@ -30,3 +31,6 @@ export const useMotionLoader = () => {
 
   return { decompressMotion };
 };
+
+// データを ZIP から取り出すのは、自分にとっては割と枯れた技術である。 -- IGNORE
+// 前（１３年ぐらい前）はzlib.jsで実装していたが、fflateはWebAssemblyも使っているらしく、より高速に動作するようだ。 -- IGNORE
