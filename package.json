@@ -14,7 +14,7 @@
   "engines": {
     "node": ">=22.12.0"
   },
-  "packageManager": "pnpm@10.32.0",
+  "packageManager": "pnpm@10.33.0",
   "scripts": {
     "dev": "astro dev",
     "lint": "prettier . -w",
@@ -24,9 +24,9 @@
   },
   "dependencies": {
     "@astro-kits/google-analytics": "^0.1.0",
-    "@astrojs/partytown": "^2.1.5",
+    "@astrojs/partytown": "^2.1.6",
     "@popperjs/core": "^2.11.8",
-    "astro": "^6.0.4",
+    "astro": "^6.1.1",
     "astro-bootstrap": "^0.7.2",
     "astro-icon": "^1.1.5",
     "bootstrap": "^5.3.8",

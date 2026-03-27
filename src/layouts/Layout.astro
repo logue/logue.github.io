@@ -21,6 +21,7 @@ const { title } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Refresh" content="0; url=https://v.logue.dev/" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
@@ -28,25 +29,32 @@ const { title } = Astro.props;
     <meta name="author" content="Logue" />
 
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://logue.dev/" />
+    <meta property="og:url" content="https://v.logue.dev/" />
     <meta property="og:title" content="Logue's Lab" />
-    <meta property="og:image" content="https://logue.dev/favicon.svg" />
     <meta
-      property="og:description"
-      content="このサイトでは、私の作った制作物を紹介しています。"
+      property="og:image"
+      content="https://v.logue.dev/web-app-manifest-192x192.png"
     />
+    <meta property="og:description" content="v.logue.dev" />
     <meta property="og:site_name" content="Logue's Lab" />
     <meta
       property="article:publisher"
       content="https://www.facebook.com/logue256"
     />
-    <meta name="twitter:site" content="logue256" />
+    <meta name="twitter:site" content="@logue256" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Logue's Lab" />
+    <meta name="twitter:description" content="v.logue.dev" />
+    <meta
+      name="twitter:image"
+      content="https://v.logue.dev/web-app-manifest-192x192.png"
+    />
     <title>{title}</title>
     <Font cssVariable="--font-ocra" preload />
-    <Font cssVariable="--font-lubri" preload />
     <GoogleAnalytics id="UA-33600926-1" />
   </head>
-  <body class="h-100 z-n2">
+  <body class="h-100 bg-dark">
+    <!-- 
     <Glitch />
     <ElfCode />
     <Scanline />
@@ -58,6 +66,10 @@ const { title } = Astro.props;
       </main>
       <AreaFooter />
     </div>
+    -->
+    <script>
+      window.location.href = "https://v.logue.dev/";
+    </script>
   </body>
 </html>
 
