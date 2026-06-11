@@ -1,3 +1,8 @@
 allowBuilds:
   esbuild: true
   sharp: true
+minimumReleaseAgeExclude:
+  - astro@6.4.6
+overrides:
+  picomatch: 4.0.4
+  postcss: 8.5.15
