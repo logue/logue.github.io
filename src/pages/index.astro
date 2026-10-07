@@ -12,24 +12,21 @@ const accomplishments = [
 <Layout title="logue.dev // PRINCIPAL_UX_ARCHITECT">
   <h1 class="display-1 mb-4 glitch-text font-lubri">LOGUE.DEV</h1>
   <p class="lead mb-5 opacity-75 tracking-tighter">
-    EXPERIENCE-DRIVEN INVERSION:<br />
+    EXPERIENCE-DRIVEN INVERSION:
+    <br />
     REVERSE-ENGINEERING THE STACK TO MANIFEST THE IDEAL UX.
   </p>
 
-  <div
-    class="row g-4 text-start mt-5 border-top border-bottom border-secondary py-4"
-  >
-    {
-      accomplishments.map((item) => (
-        <div class="col-md-4">
-          <div class="p-2 border-start border-info border-2">
-            <small class="d-block opacity-50 font-lubri">[{item.id}]</small>
-            <div class="fw-bold">{item.label}</div>
-            <div class="small opacity-75">{item.detail}</div>
-          </div>
+  <div class="row g-4 text-start mt-5 border-top border-bottom border-secondary py-4">
+    {accomplishments.map((item) => (
+      <div class="col-md-4">
+        <div class="p-2 border-start border-info border-2">
+          <small class="d-block opacity-50 font-lubri">[{item.id}]</small>
+          <div class="fw-bold">{item.label}</div>
+          <div class="small opacity-75">{item.detail}</div>
         </div>
-      ))
-    }
+      </div>
+    ))}
   </div>
   <Social />
 </Layout>

@@ -102,22 +102,20 @@ const links = [
 
 <nav aria-label="External Links" class="mt-5 container">
   <ul class="list-inline mb-0">
-    {
-      links.map((link) => (
-        <li class="list-inline-item mx-2">
-          <a
-            href={link.url}
-            class="cyber-icon-link"
-            title={link.name}
-            data-bs-toggle="tooltip"
-            data-bs-placement="top"
-            data-bs-title={link.name}
-          >
-            <Icon name={`${link.icon}`} />
-          </a>
-        </li>
-      ))
-    }
+    {links.map((link) => (
+      <li class="list-inline-item mx-2">
+        <a
+          href={link.url}
+          class="cyber-icon-link"
+          title={link.name}
+          data-bs-toggle="tooltip"
+          data-bs-placement="top"
+          data-bs-title={link.name}
+        >
+          <Icon name={`${link.icon}`} />
+        </a>
+      </li>
+    ))}
   </ul>
 </nav>
 
